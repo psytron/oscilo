@@ -1,0 +1,7 @@
+future
+mido
+numpy
+PyAudio
+pyFluidSynth
+opencv-python
+soundcard
