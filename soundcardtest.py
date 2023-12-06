@@ -10,11 +10,12 @@ def draw_wave(screen, mono_audio, xs, title="oscilloscope", gain=5 ):
     #print(mono_audio.shape)
     screen *= 0                                     # clear the screen
     ys = imHeight/2*(1 - np.clip( gain * mono_audio[0:len(xs)], -1, 1))  # the y-values of the waveform
+    
     pts = np.array(list(zip(xs,ys))).astype(int) # pair up xs & ys
     cv2.polylines(screen,[pts],False,(25,255,0))     # connect points w/ lines
     
     random_number = np.random.randint(100)           # generate a random number
-    cv2.putText(screen, f'Random Number: {random_number}', (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA) # draw text on screen
+    cv2.putText(screen, 'Random Number:'+str(random_number), (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA) # draw text on screen
     current_time = cv2.getTickCount()
     time_elapsed = (current_time - previous_time) / cv2.getTickFrequency() * 1000
     
@@ -38,8 +39,9 @@ xs = np.arange(imWidth).astype(int)                  # x values of pixels
 
 while (1):                               # keep looping until someone stops this
     with default_mic.recorder(samplerate=44100) as mic:
-        audio_data = mic.record(numframes=1024)  # get some audio from the mic
+        audio_data = mic.record(numframes=512)  # get some audio from the mic
     draw_wave(screen, audio_data[:,0], xs)             # draw left channel
+    #draw_wave(screen, [0,0], xs)             # draw blank left channel
     key = cv2.waitKey(1) & 0xFF                        # keyboard input
     if ord('q') == key:                                # quit key
         break
