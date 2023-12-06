@@ -5,6 +5,9 @@
 
 import requests
 
-response = requests.get('http://example.com/json')
+
+
+url = "http://ip.jsontest.com/"
+response = requests.get(url)
 data = response.json()
 print(data)
