@@ -36,11 +36,12 @@ while True:
     print( asciichartpy.plot ( volt_arr_0  , {"height":10} ) )
     print( "                     ")
     print( " A1 R:", raw_value_1 )
-    print( " A1 S:", scaled_value_1)      
+    print( " A1 S:", scaled_value_1)  
+    
     volt_arr_1.append(  scaled_value_1 )
-    print( asciichartpy.plot ( volt_arr_1  , {"height":10} ) )
+    print( asciichartpy.plot ( [volt_arr_0 ,volt_arr_1]  , {"height":10,"colors":[asciichartpy.blue,asciichartpy.red]} ) )
 
-    # truncate voltages 
+
     volt_arr_0= volt_arr_0[1:]
     volt_arr_1= volt_arr_1[1:]
     print("\033c", end="")
