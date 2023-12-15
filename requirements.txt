@@ -5,3 +5,4 @@ PyAudio
 pyFluidSynth
 opencv-python
 soundcard
+adafruit-circuitpython-pcf8591
