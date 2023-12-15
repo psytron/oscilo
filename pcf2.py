@@ -39,7 +39,7 @@ while True:
     print( " A1 S:", scaled_value_1)  
     
     volt_arr_1.append(  scaled_value_1 )
-    print( asciichartpy.plot ( [volt_arr_0 ,volt_arr_1]  , {"height":10,"colors":[asciichartpy.blue,asciichartpy.red]} ) )
+    print( asciichartpy.plot ( [volt_arr_0 ,volt_arr_1]  , {"height":10,"colors":[asciichartpy.green,asciichartpy.red]} ) )
 
 
     volt_arr_0= volt_arr_0[1:]
@@ -57,5 +57,3 @@ config = {
     #"padding": '       ',  // padding string for label formatting (can be overrided)
     "height":  10        #  any height you want#
 }
-
-
