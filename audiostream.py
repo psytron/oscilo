@@ -12,7 +12,10 @@ from app_setup import (
     THRESHOLD_WINDOW_SIZE,
     WINDOW_SIZE)
 from midi import hz_to_midi, RTNote
-from synth import FluidSynth
+
+import fluidsynth
+
+
 
 
 class SpectralAnalyser(object):
@@ -128,7 +131,8 @@ class StreamProcessor(object):
         self._spectral_analyser = SpectralAnalyser(
             window_size=WINDOW_SIZE,
             segments_buf=RING_BUFFER_SIZE)
-        self._synth = FluidSynth()
+        self._synth = fluidsynth.Synth()
+        self._synth.start()        
 
     def run(self):
         pya = PyAudio()
