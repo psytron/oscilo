@@ -31,8 +31,14 @@ env = ASREnvelope(attack=0.001, sustain=2.001, release=0.1, clock=clock)
 #------------------------------------------------------------------------
 # Apply the envelope, and stereo pan between speakers.
 #------------------------------------------------------------------------
+
+#dc = BiquadFilter(input=0.0, filter_type=SIGNALFLOW_FILTER_TYPE_LOW_PASS, cutoff=440, resonance=0.0, peak_gain=0.0)
+# sf = SVFilter(input=0.0, filter_type=SIGNALFLOW_FILTER_TYPE_LOW_PASS, cutoff=440, resonance=0.0)
+
 mono = sine * sqre 
+
 stereo = StereoPanner(mono, SineLFO(0.5, -1, 1))
+
 
 #------------------------------------------------------------------------
 # Add some delay.
