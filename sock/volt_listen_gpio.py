@@ -4,6 +4,7 @@
 
 import RPi.GPIO as GPIO
 import time
+import smbus
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.IN)
@@ -16,8 +17,15 @@ try:
         
         # Read I2C data from another GPIO pin
         i2c_data_2 = GPIO.input(17)
+
+        # Read I2C from another pin
+        bus = smbus.SMBus(1)
+        address = 0x04
+        i2c_data = bus.read_byte(address)
+
+
+
         print("Voltage: ", voltage)
-        print(" i2c_data ", i2c_data_2 )
         time.sleep(1)
 except KeyboardInterrupt:
     GPIO.cleanup()
