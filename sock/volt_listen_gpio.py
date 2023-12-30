@@ -25,6 +25,6 @@ try:
 
 
         print("Voltage: ", voltage)
-        time.sleep(1)
+        time.sleep(0.1)
 except KeyboardInterrupt:
     GPIO.cleanup()
