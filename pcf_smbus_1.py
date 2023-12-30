@@ -21,7 +21,6 @@ try:
             value = read_pcf_value(channel)
             print(f"Value from AIN{channel}: {value}")
         print("\033c", end="")
-        time.sleep(0.05)
 
 
 except KeyboardInterrupt:
