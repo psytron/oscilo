@@ -11,8 +11,7 @@ device = 0
 
 
 # Create SPI object
-. Implicit Pin Configuration:
-
+# Implicit Pin Configuration:
 # spi = spidev.SpiDev() creates an SPI object that implicitly uses 
 # the default SPI pins for the specified bus and device:
 # Bus 0: MOSI = GPIO 10, MISO = GPIO 9, SCLK = GPIO 11

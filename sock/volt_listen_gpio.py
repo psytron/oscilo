@@ -7,16 +7,15 @@ import time
 import smbus
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(18, GPIO.IN)
 GPIO.setup(17, GPIO.IN)
+GPIO.setup(18, GPIO.IN)
 
 try:
     while True:
-        # Read the GPIO pin 18 to get the voltage
-        voltage = GPIO.input(18)
-        
         # Read I2C data from another GPIO pin
         i2c_data_2 = GPIO.input(17)
+        # Read the GPIO pin 18 to get the voltage
+        voltage = GPIO.input(18)
 
         # Read I2C from another pin
         bus = smbus.SMBus(1)
