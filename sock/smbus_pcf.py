@@ -15,5 +15,9 @@ bus = smbus.SMBus(1)  # Assuming I2C bus 1 is used
 # Continuously read and print analog values
 while True:
     data = bus.read_byte_data(PCF8591_ADDRESS, PCF8591_ADC_REG)
+    data2 = bus.read_byte_data(0x49, PCF8591_ADC_REG)
+    data3 = bus.read_byte_data(0x4A, PCF8591_ADC_REG)
     print("Analog value:", data)
+    print("Analog value:", data2)
+    print("Analog value:", data3)
     time.sleep(0.5)  # Delay between readings (adjust as needed)
