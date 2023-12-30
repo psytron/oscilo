@@ -13,6 +13,7 @@ try:
         print(f"Device found at address 0x{i:02X}")
 
 except IOError:
+    print(f"NO Device  at address 0x{i:02X}")
     pass  # No device at this address
 
 finally:
