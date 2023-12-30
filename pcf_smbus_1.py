@@ -20,9 +20,9 @@ try:
         for channel in range(4):
             value = read_pcf_value(channel)
             print(f"Value from AIN{channel}: {value}")
+            print("\033c", end="")
+        time.sleep(0.05)
 
-        # Add a delay before the next iteration
-        time.sleep(1)
 
 except KeyboardInterrupt:
     # Handle Ctrl+C to exit the loop
