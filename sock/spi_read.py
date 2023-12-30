@@ -8,8 +8,17 @@ import time
 bus = 0
 device = 0
 
+
+
 # Create SPI object
+. Implicit Pin Configuration:
+
+# spi = spidev.SpiDev() creates an SPI object that implicitly uses 
+# the default SPI pins for the specified bus and device:
+# Bus 0: MOSI = GPIO 10, MISO = GPIO 9, SCLK = GPIO 11
+# Bus 1: MOSI = GPIO 19, MISO = GPIO 21, SCLK = GPIO 23
 spi = spidev.SpiDev()
+# spi.open(bus, device) opens the SPI bus and device, using those default pin assignments.
 spi.open(bus, device)
 
 # Set SPI mode and clock speed
