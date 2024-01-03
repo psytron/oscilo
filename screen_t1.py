@@ -1,5 +1,11 @@
 
 
+# THE BLUE LED SCREEN IS AN IC1602
+# i2c 1602 # 
+# 32 CHaracters 2 lines 16 Characters per line 
+ # 32 characters (or 32 bytes / 256 bits) at a time.
+ # 16x2 character LCD display. This means it can display 32 characters at a time, with each character being 8 bits (1 byte) in size.
+
 from RPLCD.i2c import CharLCD
 from time import sleep
 
