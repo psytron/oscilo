@@ -14,4 +14,10 @@ lcd.write_string('VOLT DISPLAY ')
 
 sleep(1 )
 
+lcd.write_string('0007 NANOSEC NANO SEC')
+
+sleep(1 )
 lcd.write_string('VOLTS READ  ')
+
+sleep(1 )
+lcd.write_string('XV4343  VOOSDI')
