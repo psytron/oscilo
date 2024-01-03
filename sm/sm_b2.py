@@ -10,6 +10,7 @@ bus = SMBus(1)
  # The second parameter '0' is the register on the device to read from.
  # A register is a small amount of storage available on the I2C device. 
  # The number of registers varies per device, but each register has a unique address.
-b = bus.read_byte_data(80, 0)
+b = bus.read_byte_data(0x48, 0)
 print(b)
-bus.close()
+bus.close()              
+
