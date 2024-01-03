@@ -10,6 +10,13 @@ lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16, rows=2, dot
               backlight_enabled=True)
 
 # Write a string to the LCD
+lcd.write_string('1234567890123456')
+lcd.write_string('1234567890123456')
+sleep(1)
+lcd.write_string('V V V V V V V V-')
+lcd.write_string('8888888888888888')
+sleep(1)
+
 lcd.write_string('0000 ')
 sleep(1)
 lcd.write_string('0001 ')
