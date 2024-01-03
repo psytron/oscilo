@@ -1,21 +1,17 @@
 
 
+from RPLCD.i2c import CharLCD
+import sleep
 
-import smbus
-import time
+# Initialize the LCD using the pins
+lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16, rows=2, dotsize=8,
+              charmap='A02',
+              auto_linebreaks=True,
+              backlight_enabled=True)
 
-# Get I2C bus
-bus = smbus.SMBus(1)
+# Write a string to the LCD
+lcd.write_string('VOLT DISPLAY ')
 
-# I2C address of the device
-DEVICE_ADDRESS = 0x27  # replace with your device's address
+sleep(1 )
 
-# Here's a simple function to write some data to the device
-def write_to_device(data):
-    bus.write_byte(DEVICE_ADDRESS, data)
-    time.sleep(0.1)
-
-# Now let's write some example text
-example_text = "VOLTS DISPlay, #1"
-for char in example_text:
-    write_to_device(ord(char))
+lcd.write_string('VOLTS READ  ')
