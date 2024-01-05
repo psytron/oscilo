@@ -1,22 +1,24 @@
-
-
-
 import time
-import RPi.GPIO as GPIO
+import smbus
 
-# Use the Broadcom SOC channel
-GPIO.setmode(GPIO.BCM)
+# Create an SMBus instance
+bus = smbus.SMBus(1)
 
-# Set the GPIO pin you've connected to
-input_pin = 4
+# PCF8591 I2C address
+PCF8591 = 0x48
 
-# Set the pin to input mode
-GPIO.setup(input_pin, GPIO.IN)
+# Select the ADC channel. For example, channel 0
+channel = 0
 
 try:
     while True:
-        # Read the sensor value
-        sensor_value = GPIO.input(input_pin)
+        # Write to the PCF8591 to select the channel
+        bus.write_byte(PCF8591, channel)
+
+        # Read the data from the PCF8591
+        # The first read may be the old value, so read twice to get the latest value
+        bus.read_byte(PCF8591)
+        sensor_value = bus.read_byte(PCF8591)
 
         # Print the sensor value
         print("Sensor value: ", sensor_value)
@@ -25,5 +27,5 @@ try:
         time.sleep(1)
 
 except KeyboardInterrupt:
-    # Reset GPIO settings if the script is exited with CTRL+C
-    GPIO.cleanup()
+    # Exit the script when CTRL+C is pressed
+    print("Script exited")
