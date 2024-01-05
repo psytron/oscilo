@@ -32,7 +32,7 @@ while True:
     volt_arr_1.append(  raw_value_1 )
     
     print( asciichartpy.plot ( volt_arr_0  , {"height":10} ) )
-    print( asciichartpy.plot ( volt_arr_0  , {"height":10,"colors":[asciichartpy.red]} ) )
+    print( asciichartpy.plot ( volt_arr_1  , {"height":10,"colors":[asciichartpy.red]} ) )
 
     # truncate values 
     volt_arr_0= volt_arr_0[1:]
