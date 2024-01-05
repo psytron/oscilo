@@ -22,7 +22,7 @@ while True:
     value_A0 = bus.read_byte(address)
     mesg_arr_0.append( value_A0 )
     print("A0 value:", value_A0 )
-    print( asciichartpy.plot ( volt_arr_0  , {"height":10} ) )
+    print( asciichartpy.plot ( mesg_arr_0  , {"height":10} ) )
     mesg_arr_0 = mesg_arr_0[1:]
 
     # Read from A1
@@ -31,7 +31,7 @@ while True:
     value_A1 = bus.read_byte(address)
     mesg_arr_1.append(  value_A1 )
     print("A1 value:", value_A1 )
-    print( asciichartpy.plot ( volt_arr_1  , {"height":10,"colors":[asciichartpy.red]} ) )
+    print( asciichartpy.plot ( mesg_arr_1  , {"height":10,"colors":[asciichartpy.red]} ) )
     mesg_arr_1 = mesg_arr_1[1:]
     
     
