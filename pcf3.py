@@ -25,13 +25,14 @@ while True:
     raw_value_0 = pcf_in_0.value
     raw_value_1 = pcf_in_1.value
 
-    print( " A0 R:", raw_value_0 )
-    print( " A1 R:", raw_value_1 )
+    print( " A0 Raw:", raw_value_0 )
+    
     
     volt_arr_0.append(  raw_value_0 )
     volt_arr_1.append(  raw_value_1 )
     
     print( asciichartpy.plot ( volt_arr_0  , {"height":10} ) )
+    print( " A1 Raw:", raw_value_1 )
     print( asciichartpy.plot ( volt_arr_1  , {"height":10,"colors":[asciichartpy.red]} ) )
 
     # truncate values 
