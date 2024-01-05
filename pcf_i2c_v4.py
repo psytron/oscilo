@@ -28,7 +28,7 @@ while True:
     df = pd.concat([df, new_rows], ignore_index=True)    
 
     # CALCULATE MOVING AVERAGE
-    dfma = df.rolling(window=10).mean()
+    dfma = df.rolling(window=20).mean()
 
     # DISPLAY DF 
     print( "A0 value:", value_A0 )
