@@ -28,13 +28,13 @@ while True:
     df = pd.concat([df, new_rows], ignore_index=True)    
 
     # CALCULATE MOVING AVERAGE
-    dfma = df.rolling(window=20).mean()
+    df = df.rolling(window=20).mean()
 
     # DISPLAY DF 
     print( "A0 value:", value_A0 )
-    print( asciichartpy.plot ( dfma['A0'].tolist()  , {"height":10} ) )
+    print( asciichartpy.plot ( df['A0'].tolist()  , {"height":10} ) )
     print( "A1 value:", value_A1 )
-    print( asciichartpy.plot ( dfma['A1'].tolist()  , {"height":10,"colors":[asciichartpy.red]} ) )
+    print( asciichartpy.plot ( df['A1'].tolist()  , {"height":10,"colors":[asciichartpy.red]} ) )
     
     # TRUNC DF 
     df =df.iloc[1:]
