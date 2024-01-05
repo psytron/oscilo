@@ -17,6 +17,7 @@ mesg_arr_1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 
 while True:
     # Read from A0
+    time.sleep(0.1)  # wait for ADC to complete
     bus.write_byte(address, command_A0)
     time.sleep(0.1)  # wait for ADC to complete
     value_A0 = bus.read_byte(address)
@@ -26,6 +27,7 @@ while True:
     mesg_arr_0 = mesg_arr_0[1:]
 
     # Read from A1
+    time.sleep(0.1)  # wait for ADC to complete
     bus.write_byte(address, command_A1)
     time.sleep(0.1)  # wait for ADC to complete
     value_A1 = bus.read_byte(address)
