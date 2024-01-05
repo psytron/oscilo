@@ -7,3 +7,5 @@ opencv-python
 soundcard
 adafruit-circuitpython-pcf8591
 smbus2    # use  import smbus2 as smbus 
+
+pandas
