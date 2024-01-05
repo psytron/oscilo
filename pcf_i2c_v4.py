@@ -36,9 +36,9 @@ while True:
 
     # DISPLAY DF 
     print( "A0 value:", value_A0 )
-    print( asciichartpy.plot ( df['A0MA'].tolist()  , {"height":10,"colors":[ asciichartpy.purple ]} ) )
+    print( asciichartpy.plot ( df['A0MA'].tolist()  , {"height":10,"colors":[ asciichartpy.cyan ]} ) )
     print( "A1 value:", value_A1 )
-    print( asciichartpy.plot ( df['A1MA'].tolist()  , {"height":10,"colors":[ asciichartpy.red    ]} ) )
+    print( asciichartpy.plot ( df['A1MA'].tolist()  , {"height":10,"colors":[ asciichartpy.magenta    ]} ) )
     
     # TRUNC DF 
     df =df.iloc[1:]
