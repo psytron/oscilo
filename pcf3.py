@@ -21,29 +21,23 @@ print( PCF.A0 , PCF.OUT , PCF )
 volt_arr_0 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 volt_arr_1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] 
 while True:
-   
-    pcf_out.value = 65535
     
     raw_value_0 = pcf_in_0.value
     raw_value_1 = pcf_in_1.value
-    
-    scaled_value_0 = (raw_value_0 / 65535) * pcf_in_0.reference_voltage
-    scaled_value_1 = (raw_value_1 / 65535) * pcf_in_1.reference_voltage
 
     print( " A0 R:", raw_value_0 )
-    print( " A0 S:", scaled_value_0 )
-    volt_arr_0.append(  scaled_value_0 )
-    print( asciichartpy.plot ( volt_arr_0  , {"height":10} ) )
-    print( "                     ")
     print( " A1 R:", raw_value_1 )
-    print( " A1 S:", scaled_value_1)  
     
-    volt_arr_1.append(  scaled_value_1 )
-    print( asciichartpy.plot ( [volt_arr_0 ,volt_arr_1]  , {"height":10,"colors":[asciichartpy.green,asciichartpy.red]} ) )
+    volt_arr_0.append(  raw_value_0 )
+    volt_arr_1.append(  raw_value_1 )
+    
+    print( asciichartpy.plot ( volt_arr_0  , {"height":10} ) )
+    print( asciichartpy.plot ( volt_arr_0  , {"height":10,"colors":[asciichartpy.red]} ) )
 
-
+    # truncate values 
     volt_arr_0= volt_arr_0[1:]
     volt_arr_1= volt_arr_1[1:]
+    # reset screen 
     print("\033c", end="")
     time.sleep(0.05)
 
