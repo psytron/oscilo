@@ -24,8 +24,8 @@ while True:
     value_A1 = bus.read_byte(address)
 
     # ADD DATA ROWS 
-    new_rows = [ { 'A0': value_A0, 'A1': value_A1 } ]
-    df = df.append(new_rows, ignore_index=True)
+    new_rows = pd.DataFrame([{'A0': value_A0, 'A1': value_A1}])
+    df = pd.concat([df, new_rows], ignore_index=True)    
 
     # DISPLAY DF 
     print( "A0 value:", value_A0 )
