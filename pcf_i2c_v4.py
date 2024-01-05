@@ -28,16 +28,14 @@ while True:
     df = pd.concat([df, new_rows], ignore_index=True)    
 
     # CALCULATE EXPONENTIAL WEIGHTED MOVING AVERAGE FOR A0
-    df['A0MA'] = df['A0'].ewm(span=88).mean()
-    df['A1MA'] = df['A1'].ewm(span=88).mean()
+    df['A0MA'] = df['A0'].rolling(window=88).mean()
+    df['A1MA'] = df['A1'].rolling(window=88).mean()
 
-    # CALCULATE MOVING AVERAGE
-    dfma = df.rolling(window=20).mean()
 
     # DISPLAY DF 
-    print( "A0 value:", value_A0 )
+    print( "A0 value:", value_A0 , "A0MA last value:", df['A0MA'].iloc[-1] )
     print( asciichartpy.plot ( df['A0MA'].tolist()  , {"height":10,"colors":[ asciichartpy.cyan ]} ) )
-    print( "A1 value:", value_A1 )
+    print( "A1 value:", value_A1 , "A1MA last value:", df['A1MA'].iloc[-1] )
     print( asciichartpy.plot ( df['A1MA'].tolist()  , {"height":10,"colors":[ asciichartpy.magenta    ]} ) )
     
     # TRUNC DF 
