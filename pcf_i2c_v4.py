@@ -8,8 +8,8 @@ address = 0x48  # replace with your device address
 command_A0 = 0x40  # control command for analog pin A0 
 command_A1 = 0x41  # control command for analog pin A1 
 df = pd.DataFrame(columns=['A0', 'A1'])
-df['A0'] = [0]*30
-df['A1'] = [0]*30
+df['A0'] = [0]*60
+df['A1'] = [0]*60
 
 
 while True:
@@ -28,8 +28,8 @@ while True:
     df = pd.concat([df, new_rows], ignore_index=True)    
 
     # CALCULATE EXPONENTIAL WEIGHTED MOVING AVERAGE FOR A0
-    df['A0MA'] = df['A0'].ewm(span=30).mean()
-    df['A1MA'] = df['A1'].ewm(span=30).mean()
+    df['A0MA'] = df['A0'].ewm(span=50).mean()
+    df['A1MA'] = df['A1'].ewm(span=50).mean()
 
     # CALCULATE MOVING AVERAGE
     dfma = df.rolling(window=20).mean()
