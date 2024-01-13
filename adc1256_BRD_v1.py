@@ -29,7 +29,7 @@ spi.open(0, 0)  # Adjust bus and device numbers if needed
 spi.max_speed_hz = 1000000  # Set SPI clock speed
 
 # GPIO setup
-cs_pin = gpiozero.OutputDevice(8)  # Adjust GPIO pin if needed
+cs_pin = gpiozero.OutputDevice(27)  # Adjust GPIO pin if needed
 drdy_pin = gpiozero.InputDevice(17)  # Adjust GPIO pin if needed
 
 # ADS1256 commands (adjust as needed)
