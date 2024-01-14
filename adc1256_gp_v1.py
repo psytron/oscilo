@@ -24,7 +24,7 @@ from pipyadc import ADS1256
  # MISO (Master Input, Slave Output): GPIO9
  # SCK (Serial Clock): GPIO11
  # CS (Chip Select): GPIO8
- PINS = {"MOSI": 10, "MISO": 9, "SCK": 11, "CS": 8}
+PINS = {"MOSI": 10, "MISO": 9, "SCK": 11, "CS": 8}
 
 # Initialise the ADC using the default settings:
 adc = ADS1256(pins=PINS)
