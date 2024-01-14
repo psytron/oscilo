@@ -7,9 +7,12 @@
 
 import RPi.GPIO as GPIO
 # These libraries can be installed using pip:
-# pip install ADS1256_definitions
+# The ADS1256_definitions module is not available for installation via pip. 
+# It should be manually downloaded and placed in the same directory as this script.
 # pip install pipyadc
 from ADS1256_definitions import *
+ # Install the pipyadc library with pip
+ # pip install pipyadc
 from pipyadc import ADS1256
 
  # Use the Raspberry Pi's GPIO Pins as SPI connection:
