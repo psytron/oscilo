@@ -5,7 +5,7 @@
 import time
 import ADS1256
 import RPi.GPIO as GPIO
-
+import random
 
 try:
     ADC = ADS1256.ADS1256()
@@ -21,6 +21,8 @@ try:
         print ("5 ADC = %lf"%(ADC_Value[5]*5.0/0x7fffff))
         print ("6 ADC = %lf"%(ADC_Value[6]*5.0/0x7fffff))
         print ("7 ADC = %lf"%(ADC_Value[7]*5.0/0x7fffff))
+        
+        print("RND    = %d" % random.randint(0, 100))
         print ("\33[9A")
 
         
