@@ -24,8 +24,10 @@ import gpiozero
 import time
 
 # SPI setup
-spi = spidev.SpiDev()
-spi.open(0, 0)  # Adjust bus and device numbers if needed
+spi = spidev.SpiDev()  # Create an instance of the SpiDev class, which represents a SPI connection to a single device.
+spi.open(0, 0)  # Open a connection to a specific SPI device. The first argument is the bus number and the second is the device number. In this case, we're connecting to bus 0, device 0. 
+# The command 'ls /dev/spi*' may give an error if no SPI devices are found.
+# Error: ls: cannot access '/dev/spi*': No such file or directory
 spi.max_speed_hz = 1000000  # Set SPI clock speed
 
 # GPIO setup
