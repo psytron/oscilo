@@ -16,6 +16,7 @@ spi.max_speed_hz = 20000
 # Read 10 bytes of data
 data = spi.readbytes(10)
 
+print( data )
 # Don't forget to close the SPI device when you're done
 spi.close()
 
