@@ -28,7 +28,7 @@ t=0.0
 
 while True:
 
-    t += 0.01
+    t += 0.0001
     x = np.sin(t)
     y = np.cos(t)
 
