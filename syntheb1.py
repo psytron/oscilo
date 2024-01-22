@@ -24,11 +24,15 @@ stream = p.open(format=pyaudio.paFloat32,
                 rate=fs,
                 output=True)
 
+t=0.0
 
 while True:
 
-    x=10
-    y=10
+    t += 0.01
+    x = np.sin(t)
+    y = np.cos(t)
+
+
 
     frequency = y / 600.0 * 3000 + 20
     future_dur = 0.0002  + ( 0.0001 * (x/2) ) 
