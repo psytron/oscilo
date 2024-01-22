@@ -2,6 +2,7 @@ import numpy as np
 import pyaudio
 import pygame
 from pygame.locals import *
+from pedalboard import Pedalboard, Chorus, Compressor, Delay, Gain, Reverb, Phaser
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
@@ -12,9 +13,12 @@ fs = 44100       # sampling rate, Hz, must be integer
 duration = 0.019   # in seconds, may be float
 prev_dur = 0.019
 f = 440.0        # sine frequency, Hz, may be float
+drifter = { 'x':0 , 'y':0 }
 
 def generate_tone(frequency):
     samples = (np.sin(2*np.pi*np.arange(fs*duration)*frequency/fs)).astype(np.float32)
+
+    #samples = (np.sign(np.sin(2*np.pi*np.arange(fs*duration)*frequency/fs))).astype(np.float32)
     return pyaudio.paFloat32, samples.tostring()
 
 def generate_tone_2(frequency,dur):
@@ -26,6 +30,15 @@ stream = p.open(format=pyaudio.paFloat32,
                 rate=fs,
                 output=True)
 
+# Create a new pedalboard.
+pb = Pedalboard([
+    Chorus( feedback=1 ),
+    Phaser(),
+    Reverb(room_size=1.0)    
+])
+
+
+
 
 while True:
     for event in pygame.event.get():
@@ -35,15 +48,18 @@ while True:
 
     x = pygame.mouse.get_pos()[0]
     y = pygame.mouse.get_pos()[1]
+    drifter['x'] = drifter['x'] - (  ( drifter['x']-x) /200  )
+    drifter['y'] = drifter['y'] - (  ( drifter['y']-y) /200  )    
 
-    frequency = y / 600.0 * 3000 + 20
-    future_dur = 0.00001 + ( 0.0001 * (x/2) ) 
+    frequency = drifter['y'] / 60.0 * 300 + 20
+    #future_dur = 0.00001 + ( 0.0001 * (drifter['x']/2) ) 
 
-    dur = future_dur - (  (future_dur - prev_dur)/50 )
+    dur = drifter['x'] * 0.0001
     
-    print( x, y, frequency , dur  )
+    print( x, y, frequency , dur  , drifter )
     
     format, sound = generate_tone_2(frequency, dur)
-
+    sound_array = np.frombuffer(sound, dtype=np.float32)
+    sound = pb.process(sound_array, sample_rate=fs)
     stream.write(sound)
     prev_dur = dur 
