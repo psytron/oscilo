@@ -24,11 +24,11 @@ stream = p.open(format=pyaudio.paFloat32,
                 rate=fs,
                 output=True)
 
-t=0.0
+t=0.00001
 
 while True:
 
-    t += 0.0001
+    t =  t + 0.000001
     x = np.sin(t)
     y = np.cos(t)
 
