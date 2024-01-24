@@ -28,16 +28,16 @@ t=0.00001
 
 while True:
 
-    t =  t + 0.000001
+    t =  t + 0.001
     x = np.sin(t)
     y = np.cos(t)
 
 
 
-    frequency = y / 600.0 * 3000 + 20
-    future_dur = 0.0002  + ( 0.0001 * (x/2) ) 
+    frequency = y / 60.0 * 30 + 2
+    future_dur = 0.0005  + ( 0.07 * (x/2) ) 
 
-    dur = future_dur - (  (future_dur - prev_dur)/50 )
+    dur = future_dur - (  (future_dur - prev_dur)/10 )
     
     print( x, y, frequency , dur  )
     
