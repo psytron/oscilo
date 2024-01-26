@@ -40,7 +40,6 @@ def main():
     m = multiprocessing.Process(target=matrix, args=())
     procs.append(m)
     m.start()
-    m.join()
 
     time.sleep(4)
 
@@ -52,7 +51,7 @@ def main():
     s = multiprocessing.Process(target=sensor, args=())
     procs.append(s)
     s.start()
-    s.join()
+    
 
 
 if __name__ == "__main__":
