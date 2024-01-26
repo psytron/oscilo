@@ -1,9 +1,11 @@
 
 
+import synthbase as syn
+from multiprocessing import Process
+import random
 
-import subprocess
-import os
-import signal
 
-# Start the syntheb1.py script in a separate process
-process = subprocess.Popen(['python', 'syntheb1.py'])
+p = Process(target=syn.runsound)
+p.start()
+p.join()
+print('joi')
