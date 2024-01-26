@@ -2,7 +2,8 @@
 
 
 # In the first Python interactive shell
-from multiprocessing import shared_memory, Event
+from multiprocessing import shared_memory, Event, Manager 
+
 import multiprocessing
 import numpy as np
 import time
@@ -39,7 +40,8 @@ def sensor( evnt ):
 
 
 def main():
-    evnt = Event()
+    manager =  Manager()
+    evnt = manager.Event()
     procs = []
 
 
@@ -58,7 +60,10 @@ def main():
     procs.append(s)
     s.start()
     
+    for proc in procs:
+        proc.join()
 
+    manager.shutdown()
 
 if __name__ == "__main__":
     main()
