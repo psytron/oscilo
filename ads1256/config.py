@@ -28,7 +28,7 @@
 #
 
 
-import spidev
+import spidev  # To install spidev, use the command: pip install spidev
 import RPi.GPIO as GPIO
 import time
 
