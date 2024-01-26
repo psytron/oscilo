@@ -8,7 +8,7 @@ import multiprocessing
 import numpy as np
 import time
 import random
-from ads1256 import harvest
+#from ads1256 import harvest
 
 
 
@@ -31,7 +31,7 @@ def worker( evnt ):
     while True: 
         i=9
         print( mtrx , random.randint(1, 100) )
-        print( harvest.read() )
+        #print( harvest.read() )
 
 
 
