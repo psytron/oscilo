@@ -7,8 +7,7 @@ import multiprocessing
 import numpy as np
 import time
 import random
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+
 ###
 def matrix( ):
     a = np.array([1, 3, 8])  # Start with an existing NumPy array
