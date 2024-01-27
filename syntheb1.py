@@ -52,3 +52,5 @@ def run():
         prev_dur = dur 
 
 
+if __name__ == "__main__":
+    run()
