@@ -1,16 +1,13 @@
 
 
 
-# In the first Python interactive shell
 from multiprocessing import shared_memory, Event, Manager 
-
 import multiprocessing
 import numpy as np
 import time
 import random
 import os 
 from ads1256 import harvest
-
 import numpy as np
 import pyaudio
 
@@ -62,25 +59,23 @@ def sensor( evnt ):
 
 
 def main():
-    manager =  Manager()
-    evnt = manager.Event()
     procs = []
-
+    manager = Manager()
+    evnt = manager.Event()
     m = multiprocessing.Process(target=matrix, args=( evnt, ))
     w = multiprocessing.Process(target=worker, args=( evnt, ))
     s = multiprocessing.Process(target=sensor, args=( evnt, ))
     procs.append(m)
-    m.start()
     procs.append(w)
-    w.start()
     procs.append(s)
+    m.start()
+    w.start()
     s.start()
-    
-    print( procs )
     for proc in procs:
         proc.join()
 
-    #manager.shutdown()
+
+
 
 if __name__ == "__main__":
     main()
