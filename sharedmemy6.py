@@ -51,7 +51,7 @@ def worker( evnt ):
     while True: 
         i=9
         print( 'MTRX: ', mtrx , random.randint(1, 100) )
-        stream.write( generate_tone( mtrx[0], mtrx[1] ) )        
+        stream.write( generate_tone( mtrx[0], 0.03 ) )        
 
 
 
