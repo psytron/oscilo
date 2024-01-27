@@ -33,28 +33,25 @@ def matrix( evnt ):
  
 
 def worker( evnt ):
+    import numpy as np
+    import pyaudio
+
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
     mtrx = np.ndarray((8,), dtype=np.float64, buffer=existing_shm.buf)
-    p = pyaudio.PyAudio()
-
-    sample_rate = 44100       # sampling rate, Hz, must be integerf
-
-    def generate_tone(frequency,dur):
-        samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*frequency/ sample_rate )).astype(np.float32)
-        return samples.tobytes()
-
-    stream = p.open(format=pyaudio.paFloat32,
-                    channels=1,
-                    rate=sample_rate,
-                    output=True)    
-    while True: 
-        i=9
-        print( 'MTRX: ', mtrx , random.randint(1, 100) )
-        stream.write( generate_tone( 0.01 , matrix[0] ) )        
+    sample_rate = 44100
+    pa = pyaudio.PyAudio()
+    stream = pa.open(format=pyaudio.paFloat32,channels=1,rate=sample_rate,output=True)    
+    dur = 0.1
+    freq = 528
+    while True:
+        freq = mtrx[0] *10 
+        samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*freq/ sample_rate )).astype(np.float32)
+        stream.write( samples.tobytes() )
 
 
 
+ 
 
 def sensor( evnt ):
     # This line makes the process wait until the event is set in another process.

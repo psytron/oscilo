@@ -6,24 +6,14 @@ import pyaudio
 
 
 def run():
- 
-
-    p = pyaudio.PyAudio()
- 
-    sample_rate = 44100       # sampling rate, Hz, must be integerf
- 
-
-    def generate_tone(frequency,dur):
-        samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*frequency/ sample_rate )).astype(np.float32)
-        return samples.tobytes()
-
-    stream = p.open(format=pyaudio.paFloat32,
-                    channels=1,
-                    rate=sample_rate,
-                    output=True)    
+    sample_rate = 44100
+    pa = pyaudio.PyAudio()
+    stream = pa.open(format=pyaudio.paFloat32,channels=1,rate=sample_rate,output=True)    
+    dur = 0.1
+    freq = 528
     while True:
-
-        stream.write( generate_tone( 0.7, 0.03 ) )
+        samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*freq/ sample_rate )).astype(np.float32)
+        stream.write( samples.tobytes() )
  
 
 if __name__ == "__main__":
