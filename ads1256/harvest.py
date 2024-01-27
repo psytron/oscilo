@@ -45,13 +45,14 @@ time.sleep(2)
 
 def yo():
     valz = ADC.ADS1256_GetAll()
-    print(  valz )
-    print(  valz[0] )
-
     out_arr = [ valz[0]*5.0/0x7fffff ,
                 valz[1]*5.0/0x7fffff ,
                 valz[2]*5.0/0x7fffff ,
-                valz[3]*5.0/0x7fffff ]
+                valz[3]*5.0/0x7fffff ,
+                valz[4]*5.0/0x7fffff ,
+                valz[5]*5.0/0x7fffff ,
+                valz[6]*5.0/0x7fffff ,
+                valz[7]*5.0/0x7fffff ]
     return out_arr 
 
 
