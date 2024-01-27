@@ -3,17 +3,19 @@ import pyaudio
 
 
 
+global t 
+global prev_dur 
 
 p = pyaudio.PyAudio()
 volume = 0.5     # range [0.0, 1.0]
 fs = 44100       # sampling rate, Hz, must be integer
 duration = 0.019   # in seconds, may be float
+
 prev_dur = 0.019
 f = 440.0        # sine frequency, Hz, may be float
+t=0.00001
 
-def generate_tone(frequency):
-    samples = (np.sin(2*np.pi*np.arange(fs*duration)*frequency/fs)).astype(np.float32)
-    return pyaudio.paFloat32, samples.tostring()
+ 
 
 def generate_tone_2(frequency,dur):
     samples = (np.sin(2*np.pi*np.arange(fs*dur)*frequency/fs)).astype(np.float32)
@@ -24,13 +26,11 @@ stream = p.open(format=pyaudio.paFloat32,
                 rate=fs,
                 output=True)
 
-t=0.00001
 
-def megafunc( intex ):
-    print(  intex )
-    t = intex 
-
+ 
 def run():
+    global t
+    global prev_dur
     while True:
 
         t =  t + 0.001
@@ -50,3 +50,5 @@ def run():
 
         stream.write(sound)
         prev_dur = dur 
+
+

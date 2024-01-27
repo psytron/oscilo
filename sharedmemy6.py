@@ -10,6 +10,7 @@ import time
 import random
 import os 
 from ads1256 import harvest
+import syntheb1
 
 
 
@@ -32,12 +33,11 @@ def worker( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
     mtrx = np.ndarray((8,), dtype=np.float64, buffer=existing_shm.buf)
-
-
+    syntheb1.run()
     while True: 
         i=9
-        time.sleep(0.5)
-        print( 'MATRIX: ', mtrx , random.randint(1, 100) )
+        print( 'MTRX: ', mtrx , random.randint(1, 100) )
+
         
 
 
