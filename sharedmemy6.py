@@ -10,7 +10,10 @@ import time
 import random
 import os 
 from ads1256 import harvest
-import syntheb2
+
+import numpy as np
+import pyaudio
+
 
 
 
@@ -33,12 +36,22 @@ def worker( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
     mtrx = np.ndarray((8,), dtype=np.float64, buffer=existing_shm.buf)
-    syntheb2.run()
+    p = pyaudio.PyAudio()
+
+    sample_rate = 44100       # sampling rate, Hz, must be integerf
+
+    def generate_tone(frequency,dur):
+        samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*frequency/ sample_rate )).astype(np.float32)
+        return samples.tobytes()
+
+    stream = p.open(format=pyaudio.paFloat32,
+                    channels=1,
+                    rate=sample_rate,
+                    output=True)    
     while True: 
         i=9
         print( 'MTRX: ', mtrx , random.randint(1, 100) )
-
-        
+        stream.write( generate_tone( 0.7, 0.03 ) )        
 
 
 
