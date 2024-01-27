@@ -72,5 +72,4 @@ def module_init():
     SPI.max_speed_hz = 20000
     SPI.mode = 0b01
     return 0;
-
-### END OF FILE ###
+ 

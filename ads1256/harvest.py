@@ -17,31 +17,18 @@ import random
 ADC = ADS1256.ADS1256()
 ADC.ADS1256_init()
 time.sleep(2)
-# try:
-#     ADC = ADS1256.ADS1256()
-#     ADC.ADS1256_init()
-
-#     while(1):
-#         ADC_Value = ADC.ADS1256_GetAll()
-#         print ("~0 ADC = %lf"%(ADC_Value[0]*5.0/0x7fffff))
-#         print ("~1 ADC = %lf"%(ADC_Value[1]*5.0/0x7fffff))
-#         print ("~2 ADC = %lf"%(ADC_Value[2]*5.0/0x7fffff))
-#         print (" 3 ADC = %lf"%(ADC_Value[3]*5.0/0x7fffff))
-#         print (" 4 ADC = %lf"%(ADC_Value[4]*5.0/0x7fffff))
-#         print (" 5 ADC = %lf"%(ADC_Value[5]*5.0/0x7fffff))
-#         print (" 6 ADC = %lf"%(ADC_Value[6]*5.0/0x7fffff))
-#         #print ("7 ADC = %lf"%(ADC_Value[7]*5.0/0x7fffff))
-        
-#         print("RND    = %d" % random.randint(0, 100))
-#         # This line moves the cursor up 9 lines in the console
-#         print ("\33[9A")
 
         
-# except :
-#     GPIO.cleanup()
-#     print ("\r\nProgram end     ")
-#     exit()
+ 
+# The ADS1256 ADC module used in this code can measure voltages in the range of 0 to 5V. 
+# The raw ADC readings are in the range of 0 to 8388607 (or 0x7fffff in hexadecimal), ]
+# which is the maximum positive value that can be represented with 24 bits.
 
+# 0x7fffff is hexadecimal representation of the number 8388607. 
+# it's used as a divisor to normalize the ADC (Analog-to-Digital Converter) readings.
+# The ADS1256 ADC module used in this code has a 24-bit resolution. 
+# max positive value that can be represented with 24 bits is 2^23 - 1, 
+# which equals 8388607 or 0x7fffff in hexadecimal.
 
 def yo():
     valz = ADC.ADS1256_GetAll()
