@@ -45,7 +45,7 @@ def worker( evnt ):
     dur = 0.01
     freq = 528
     while True:
-        freq = 20+  mtrx[0] *10 
+        freq = 20+  mtrx[0] *100 
         samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*freq/ sample_rate )).astype(np.float32)
         stream.write( samples.tobytes() )
 
