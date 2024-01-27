@@ -43,6 +43,9 @@ ADC.ADS1256_init()
 #     exit()
 
 
+def yo():
+    return 99
+
 
 def read():
     out_arr =[]

@@ -51,7 +51,7 @@ def sensor( evnt ):
     while True:
         time.sleep(2)
         print('sensor ping: ')
-        r = harvest.read()
+        r = harvest.yo()
         print( r )
     
 
