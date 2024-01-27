@@ -14,7 +14,7 @@ from ads1256 import harvest
 
 
 def matrix( evnt ):
-    a = np.array([1, 3, 8])  # Start with an existing NumPy array
+    a = np.array([1,3,8,0,1,2,3,4])  # Start with an existing NumPy array
     shm = shared_memory.SharedMemory(create=True, size=a.nbytes  , name='xor')
     b = np.ndarray(a.shape, dtype=a.dtype, buffer=shm.buf) # Now create a NumPy array backed by shared memory
     b[:] = a[:]  # Copy the original data into shared memory
@@ -30,7 +30,7 @@ def matrix( evnt ):
 def worker( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
-    mtrx = np.ndarray((3,), dtype=np.int64, buffer=existing_shm.buf)
+    mtrx = np.ndarray((8,), dtype=np.int64, buffer=existing_shm.buf)
 
 
     while True: 
@@ -47,7 +47,7 @@ def sensor( evnt ):
     # It ensures that the shared memory is ready before this process tries to access it.
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
-    mtrx = np.ndarray((3,), dtype=np.int64, buffer=existing_shm.buf)
+    mtrx = np.ndarray((8,), dtype=np.int64, buffer=existing_shm.buf)
     while True:
         time.sleep(2)
         print('sensor ping: ')
