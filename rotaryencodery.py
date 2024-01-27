@@ -12,10 +12,11 @@ import time
 #CLK = 17  # Clock pin
 
 
-SW = 21  # Switch pin   
-DT = 20  # Data pin
-CLK = 16  # Clock pin
 
+# black
+CLK = 16  # Clock pin
+DT = 20  # Data pin
+SW = 21  # Switch pin   
 
 # Variables
 px = 0  # Initial value of px
@@ -40,13 +41,30 @@ def handle_CLK_falling(channel):
     global last_CLK_state
     last_CLK_state = False
 
+# Define event handler for both rising and falling edges of CLK pin
+def handle_CLK_edge(channel):
+    global last_CLK_state, px
+    current_CLK_state = GPIO.input(CLK)
+    if current_CLK_state != last_CLK_state:
+        if current_CLK_state and GPIO.input(DT) != current_CLK_state:
+            px += 1  # Increment px on clockwise rotation
+        elif current_CLK_state and GPIO.input(DT) == current_CLK_state:
+            px -= 1  # Decrement px on counterclockwise rotation
+    last_CLK_state = current_CLK_state
+
+
 def handle_SW_press(channel):
     # Do something when the switch is pressed
     print("Switch pressed!")
 
+
+# Add event listener for CLK pin
+GPIO.add_event_detect(CLK, GPIO.BOTH, callback=handle_CLK_edge)    
+
 # Add event listeners for CLK and DT pins
-GPIO.add_event_detect(CLK, GPIO.RISING, callback=handle_CLK_rising)
-GPIO.add_event_detect(CLK, GPIO.FALLING, callback=handle_CLK_falling)
+#GPIO.add_event_detect(CLK, GPIO.RISING, callback=handle_CLK_rising)
+#GPIO.add_event_detect(CLK, GPIO.FALLING, callback=handle_CLK_falling)
+
 
 # Add event listener for SW pin (optional)
 GPIO.add_event_detect(SW, GPIO.FALLING, callback=handle_SW_press)
