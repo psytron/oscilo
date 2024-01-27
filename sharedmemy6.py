@@ -42,10 +42,10 @@ def worker( evnt ):
     sample_rate = 44100
     pa = pyaudio.PyAudio()
     stream = pa.open(format=pyaudio.paFloat32,channels=1,rate=sample_rate,output=True)    
-    dur = 0.1
+    dur = 0.01
     freq = 528
     while True:
-        freq = mtrx[0] *10 
+        freq = 120+  mtrx[0] *10 
         samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*freq/ sample_rate )).astype(np.float32)
         stream.write( samples.tobytes() )
 
