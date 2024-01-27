@@ -25,7 +25,7 @@ def matrix( evnt ):
     b[:] = a[:]  # Copy the original data into shared memory
     evnt.set()  # Signal that the shared memory object is ready
     while True:
-        time.sleep(1)
+
         print(' Matrix Shared Proc:  ', os.getpid(), b )
         pass
 
