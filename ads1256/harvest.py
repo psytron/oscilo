@@ -16,7 +16,7 @@ import random
 
 ADC = ADS1256.ADS1256()
 ADC.ADS1256_init()
-
+time.sleep(2)
 # try:
 #     ADC = ADS1256.ADS1256()
 #     ADC.ADS1256_init()
