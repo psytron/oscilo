@@ -44,7 +44,7 @@ time.sleep(2)
 
 
 def yo():
-    print( ADC )
+    print( ADC.ADS1256_GetAll() )
     return 99
 
 
