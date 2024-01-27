@@ -50,7 +50,9 @@ def sensor( evnt ):
     mtrx = np.ndarray((3,), dtype=np.int64, buffer=existing_shm.buf)
     while True:
         time.sleep(2)
-        print('sensor ping')
+        print('sensor ping: ')
+        r = harvest.read()
+        print( r )
     
 
 
