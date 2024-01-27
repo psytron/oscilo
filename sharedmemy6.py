@@ -14,15 +14,15 @@ from ads1256 import harvest
 
 
 def matrix( evnt ):
-    a = np.array([0.1,0.3,0.8,0,1,2,3,4])  # Start with an existing NumPy array
-    print( ' derived dtype: ', a.dtype )
+    a = np.array( [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0] )  # Start with an existing NumPy array
+    print( ' dtype: ', a.dtype )
     shm = shared_memory.SharedMemory(create=True, size=a.nbytes  , name='xor')
     b = np.ndarray(a.shape, dtype=a.dtype, buffer=shm.buf) # Now create a NumPy array backed by shared memory
     b[:] = a[:]  # Copy the original data into shared memory
     evnt.set()  # Signal that the shared memory object is ready
     while True:
         time.sleep(5)
-        print(' Matrix Shared Proc:  ', os.getpid() , b )
+        print(' Matrix Shared Proc:  ', os.getpid(), b )
         pass
 
 
