@@ -44,6 +44,7 @@ time.sleep(2)
 
 
 def yo():
+    print( ADC )
     return 99
 
 
