@@ -73,6 +73,7 @@ GPIO.add_event_detect(SW, GPIO.FALLING, callback=handle_SW_press)
 try:
     while True:
         time.sleep(0.01)  # Add a small delay to avoid excessive CPU usage
+        print( px )
 
 except KeyboardInterrupt:
     # Stop event detection and clean up GPIO pins when script is interrupted
