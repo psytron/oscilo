@@ -1,15 +1,14 @@
 import numpy as np
 import pyaudio
-import pygame
-from pygame.locals import *
 
-pygame.init()
-screen = pygame.display.set_mode((800, 600))
-print('erun ')
+
+
+
 p = pyaudio.PyAudio()
 volume = 0.5     # range [0.0, 1.0]
 fs = 44100       # sampling rate, Hz, must be integer
 duration = 0.019   # in seconds, may be float
+global prev_dur
 prev_dur = 0.019
 f = 440.0        # sine frequency, Hz, may be float
 
@@ -26,24 +25,34 @@ stream = p.open(format=pyaudio.paFloat32,
                 rate=fs,
                 output=True)
 
+global t
 
-while True:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
 
-    x = pygame.mouse.get_pos()[0]
-    y = pygame.mouse.get_pos()[1]
+t=0.00001
 
-    frequency = y / 600.0 * 3000 + 20
-    future_dur = 0.00001 + ( 0.0001 * (x/2) ) 
+def megafunc( intex ):
+    print(  intex )
+    t = intex 
 
-    dur = future_dur - (  (future_dur - prev_dur)/50 )
-    
-    print( x, y, frequency , dur  )
-    
-    format, sound = generate_tone_2(frequency, dur)
+def runsound():
+    while True:
 
-    stream.write(sound)
-    prev_dur = dur 
+        global t 
+        global prev_dur
+        t =  t + 0.001
+        x = np.sin(t)
+        y = np.cos(t)
+
+
+
+        frequency = y / 60.0 * 30 + 2
+        future_dur = 0.0005  + ( 0.07 * (x/2) ) 
+
+        dur = future_dur - (  (future_dur - prev_dur)/10 )
+        
+        #print( x, y, frequency , dur  )
+        
+        format, sound = generate_tone_2(frequency, dur)
+
+        stream.write(sound)
+        prev_dur = dur 

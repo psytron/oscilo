@@ -28,14 +28,20 @@
 #
 
 
-import spidev
+import spidev  # To install spidev, use the command: pip install spidev
 import RPi.GPIO as GPIO
 import time
 
-# Pin definition
-RST_PIN         = 18
+# Pin definition for the ADS1256
+# RST_PIN is the Reset Pin. This pin is used to reset the ADS1256. Connect this to GPIO 18 on the Raspberry Pi.
+RST_PIN      = 18
+# CS_PIN is the Chip Select Pin. This pin is used to enable/disable the ADS1256. Connect this to GPIO 22 on the Raspberry Pi.
 CS_PIN       = 22
-DRDY_PIN        = 17
+# DRDY_PIN is the Data Ready Pin. This pin is used to indicate when data is ready to be read from the ADS1256. Connect this to GPIO 17 on the Raspberry Pi.
+DRDY_PIN     = 17
+
+
+
 
 # SPI device, bus = 0, device = 0
 SPI = spidev.SpiDev(0, 0)
@@ -66,5 +72,4 @@ def module_init():
     SPI.max_speed_hz = 20000
     SPI.mode = 0b01
     return 0;
-
-### END OF FILE ###
+ 
