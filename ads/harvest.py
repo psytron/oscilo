@@ -13,7 +13,7 @@ import time
 import os
 print(os.getcwd())
 print( 'about to import ADS1256mod')
-import ADS1256mod
+from ads import ADS1256mod
 import RPi.GPIO as GPIO
 import random
 
