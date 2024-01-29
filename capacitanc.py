@@ -15,6 +15,7 @@ import time
 sensorPin = 13
 
 GPIO.setmode(GPIO.BCM)
+print(' setting gpio: ', sensorPin )
 GPIO.setup(sensorPin, GPIO.OUT)
 
 def readCapacitance():
