@@ -15,6 +15,8 @@ def measure_iterations_per_second():
         
         end_time = time.time()
         if end_time - start_time >= 1:  # If more than a second has passed
+            print(f" ")  
+            print(f" ")  
             print(f"Iterations per second       : {iterations}")  
             print(f"Iterations per second in KHz: {iterations / 1_000:.3f}")
             print(f"Iterations per second in MHz: {iterations / 1_000_000:.6f}")
