@@ -10,7 +10,9 @@ def measure_iterations_per_second():
     start_time = time.time()
     iterations = 0
     while True:
+
         iterations += 1
+        
         end_time = time.time()
         if end_time - start_time >= 1:  # If more than a second has passed
             print(f"Iterations per second       : {iterations}")  
