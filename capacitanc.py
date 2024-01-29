@@ -19,6 +19,7 @@ print(' setting gpio: ', sensorPin )
 GPIO.setup(sensorPin, GPIO.OUT)
 
 def readCapacitance():
+    GPIO.setup(sensorPin, GPIO.OUT)
     GPIO.output(sensorPin, GPIO.HIGH)
     time.sleep(0.1)
     GPIO.setup(sensorPin, GPIO.IN)
@@ -28,6 +29,7 @@ def readCapacitance():
         end_time = time.time()
         if end_time - start_time > 1:
             return False
+    GPIO.setup(sensorPin, GPIO.OUT)  # Set the sensorPin as an output again before the function ends
     return end_time - start_time
 
 while True:
