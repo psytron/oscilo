@@ -1,4 +1,4 @@
-from ads1256 import config
+import config
 import RPi.GPIO as GPIO
 
 
