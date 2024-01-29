@@ -5,7 +5,7 @@
 # https://e2e.ti.com/support/data-converters-group/data-converters/f/data-converters-forum/898004/ads1256-getting-different-readings-when-using-differential-mode-vs-common-mode-on-ads1256
 
 import time
-from ADS1256 import ADS1256
+import ADS1256
 import RPi.GPIO as GPIO
 import random
 
