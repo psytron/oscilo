@@ -17,13 +17,13 @@ import rotaryencodery3
 
 
 def matrix( evnt ):
-    a = np.array( [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0] )      # Start with an existing NumPy array
+    a = np.array( [ 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 ] )      # Start with an existing NumPy array
     shm = shared_memory.SharedMemory(create=True, size=a.nbytes  , name='xor')
     b = np.ndarray(a.shape, dtype=a.dtype, buffer=shm.buf) # Now create a NumPy array backed by shared memory
     b[:] = a[:]                                            # Copy the original data into shared memory
     evnt.set()                                             # Signal that the shared memory object is ready
     while True:
-        print(' Matrix Shared Proc:  ', os.getpid(), b )
+        print(' Matrix:  ', b )
         time.sleep(3)
 
 
