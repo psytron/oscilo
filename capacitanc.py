@@ -38,4 +38,4 @@ while True:
         print("Capacitance: ", capacitance)
     else:
         print("Timeout")
-    time.sleep(0.1)
+    
