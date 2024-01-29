@@ -30,6 +30,7 @@ def setup_rotary_listener( callback_in ):
 
     def handle_CLK_edge(channel):
         nonlocal last_CLK_state
+        nonlocal px
         current_CLK_state = GPIO.input(CLK)
         if current_CLK_state != last_CLK_state:
             if current_CLK_state and GPIO.input(DT) != current_CLK_state:
