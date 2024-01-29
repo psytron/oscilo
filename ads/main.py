@@ -5,12 +5,12 @@
 # https://e2e.ti.com/support/data-converters-group/data-converters/f/data-converters-forum/898004/ads1256-getting-different-readings-when-using-differential-mode-vs-common-mode-on-ads1256
 
 import time
-import ADS1256
+import ADS1256mod
 import RPi.GPIO as GPIO
 import random
 
 try:
-    ADC = ADS1256.ADS1256()
+    ADC = ADS1256mod.ADS1256()
     ADC.ADS1256_init()
 
     while(1):
