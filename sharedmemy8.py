@@ -17,7 +17,7 @@ import rotaryencodery3
 
 
 def matrix( evnt ):
-    a = np.array( [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0] )      # Start with an existing NumPy array
+    a = np.array( [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0] )      # Start with an existing NumPy array
     shm = shared_memory.SharedMemory(create=True, size=a.nbytes  , name='xor')
     b = np.ndarray(a.shape, dtype=a.dtype, buffer=shm.buf) # Now create a NumPy array backed by shared memory
     b[:] = a[:]                                            # Copy the original data into shared memory
@@ -32,7 +32,7 @@ def matrix( evnt ):
 def worker( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
-    mtrx = np.ndarray((8,), dtype=np.float64, buffer=existing_shm.buf)
+    mtrx = np.ndarray((9,), dtype=np.float64, buffer=existing_shm.buf)
     sample_rate = 44100
     pa = pyaudio.PyAudio()
     stream = pa.open(format=pyaudio.paFloat32,channels=1,rate=sample_rate,output=True)    
@@ -51,7 +51,7 @@ def worker( evnt ):
 def sensor( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
-    mtrx = np.ndarray((8,), dtype=np.float64, buffer=existing_shm.buf)
+    mtrx = np.ndarray((9,), dtype=np.float64, buffer=existing_shm.buf)
     while True:
         r = harvest.yo()
         mtrx[:] = r[:]
@@ -61,10 +61,10 @@ def sensor( evnt ):
 def rotary( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
-    mtrx = np.ndarray((8,), dtype=np.float64, buffer=existing_shm.buf)
+    mtrx = np.ndarray((9,), dtype=np.float64, buffer=existing_shm.buf)
 
     def update_px( in_val ):
-        mtrx[4] = in_val    
+        mtrx[8] = in_val    
     rotaryencodery3.setup_rotary_listener( update_px )
 
     
