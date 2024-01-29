@@ -39,8 +39,8 @@ def worker( evnt ):
     dur = 0.001
     freq = 528
     while True:
-        freq = 20+  mtrx[8] 
-        dur = 0.005+mtrx[0]#+ ( mtrx[8] /10 )
+        freq = 10+  mtrx[8] 
+        dur = 0.05+mtrx[0]#+ ( mtrx[8] /10 )
         samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*freq/ sample_rate )).astype(np.float32)
         stream.write( samples.tobytes() )
 
