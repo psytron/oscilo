@@ -13,3 +13,8 @@ while True:
     for i, percentage in enumerate(psutil.cpu_percent(percpu=True)):
         print(f"Core {i}: {percentage}%")
     time.sleep(1)  # Sleep for 1 second
+
+
+# effective rate per dore 
+# get effective rate per core by seeing how many iterations of computation per second 
+
