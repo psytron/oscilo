@@ -1,4 +1,4 @@
-from ads import config
+import config
 import RPi.GPIO as GPIO
 
 
