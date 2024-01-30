@@ -20,7 +20,7 @@ def generate_tone(frequency, duration):
 
 def play_tone(pwm, note, duration):
     for i in note:
-        pwm.ChangeFrequency(440 * 2 ** (i / 12))  # Change the frequency
+        pwm.ChangeFrequency(240 * 2 ** (i / 12))  # Change the frequency
         time.sleep(duration / len(note))  # Wait for the note to end
 
 # This line initializes a PWM (Pulse Width Modulation) instance on the GPIO pin connected to the buzzer.
