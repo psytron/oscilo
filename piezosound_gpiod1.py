@@ -8,7 +8,7 @@ import time
 import numpy as np
 
 buzzerPin = 26
-chip = gpiod.Chip('gpiochip0')
+chip = gpiod.Chip('gpiochip1')
 line = chip.get_line(buzzerPin)
 line.request(consumer='my_app', type=gpiod.LINE_REQ_DIR_OUT)
 
