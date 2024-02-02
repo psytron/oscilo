@@ -1,12 +1,12 @@
 
 
-from gpiozero import LED
+from gpiozero import DigitalInputDevice, DigitalOutputDevice
 from time import sleep
 
-led = LED(26)
+output_device = DigitalOutputDevice( 26 )
 
 while True:
-    led.on()
+    output_device.on()
     sleep(1)
-    led.off()
+    output_device.off()
     sleep(1)
