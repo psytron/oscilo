@@ -18,13 +18,9 @@ with gpiod.request_lines(
 ) as request:
     start_time = time.time()
     while True:
-        request.set_value(LINE, Value.ACTIVE)
-        time.sleep( delay )
-        request.set_value(LINE, Value.INACTIVE)
-        time.sleep( delay )
         
         elapsed_time = time.time() - start_time
-        delay = 0.1 - (0.1 - 0.00001) * (elapsed_time / 20)
+        delay = 0.0001 + (0.1 - 0.0001) * (np.sin(elapsed_time) + 1) / 2
         request.set_value(LINE, Value.ACTIVE)
         time.sleep(delay)
         request.set_value(LINE, Value.INACTIVE)
