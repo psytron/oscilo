@@ -1,13 +1,5 @@
-
-
-
-
 import gpiod
 
-chip = gpiod.Chip('gpiochip4')
-line = chip.get_line(26)
-line.request(consumer="blinktest", type=gpiod.LINE_REQ_DIR_OUT)
-
-while True:
-    line.set_value(1)
-    line.set_value(0)
+with gpiod.Chip("/dev/gpiochip4") as chip:
+    info = chip.get_info()
+    print(f"{info.name} [{info.label}] ({info.num_lines} lines)")
