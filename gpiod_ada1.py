@@ -15,4 +15,6 @@ with gpiod.request_lines(
 ) as request:
     while True:
         request.set_value(LINE, Value.ACTIVE)
+        time.sleep(0.01)
         request.set_value(LINE, Value.INACTIVE)
+        time.sleep(0.01)
