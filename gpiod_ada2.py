@@ -24,7 +24,7 @@ with gpiod.request_lines(
         time.sleep( delay )
         
         elapsed_time = time.time() - start_time
-        delay = 0.05 * (1 + np.sin(2 * np.pi * elapsed_time / 10))
+        delay = 0.1 - (0.1 - 0.00001) * (elapsed_time / 20)
         request.set_value(LINE, Value.ACTIVE)
         time.sleep(delay)
         request.set_value(LINE, Value.INACTIVE)
