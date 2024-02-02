@@ -1,5 +1,5 @@
 import time
-
+import gpiod
 from gpiod.line import Direction, Value
 
 LINE = 26
