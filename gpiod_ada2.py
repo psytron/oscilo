@@ -5,7 +5,7 @@ from gpiod.line import Direction, Value
 LINE = 26
 
 with gpiod.request_lines(
-    "/dev/gpiochip4",
+    "gpiochip4",
     consumer="blink-example",
     config={
         LINE: gpiod.LineSettings(
