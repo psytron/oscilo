@@ -50,7 +50,7 @@ def waveform( evnt ):
     freq = 528
     iters = 0
     while True:
-        freq = 120+ ( mtrx[8] /2)
+        freq = 120+ ( mtrx[8] )
         dur = max(0.0001, 0.1 - (mtrx[9] / 1000))
         
         # Generate a sinusoidal waveform with frequency 'freq' and duration 'dur'
