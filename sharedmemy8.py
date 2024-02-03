@@ -11,7 +11,7 @@ from ads import harvest
 import numpy as np
 import pyaudio
 
-import rotaryencodery3
+import rotaryencodery5 as rotary
 
 
 
@@ -63,9 +63,9 @@ def rotary( evnt ):
     existing_shm = shared_memory.SharedMemory(name='xor')
     mtrx = np.ndarray((9,), dtype=np.float64, buffer=existing_shm.buf)
 
-    def update_px( in_val ):
-        mtrx[8] = in_val    
-    rotaryencodery3.setup_rotary_listener( update_px )
+    def update_px( px1, px2 ):
+        mtrx[8] = px1
+    rotary.setup_rotary_listener( update_px )
 
     
 
