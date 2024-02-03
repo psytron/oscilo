@@ -51,8 +51,8 @@ def worker( evnt ):
     dur = 0.001
     freq = 528
     while True:
-        freq = 60+  mtrx[8] 
-        dur = 0.15+mtrx[9]#+ ( mtrx[8] /10 )
+        freq = 30+ ( mtrx[8] /10)
+        dur = 0.000015+(mtrx[9]/100)#+ ( mtrx[8] /10 )
         samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*freq/ sample_rate )).astype(np.float32)
         stream.write( samples.tobytes() )
 
@@ -76,7 +76,6 @@ def rotary( evnt ):
     mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
 
     def update_px( px1, px2 ):
-        print( 'px update ' , px1, px2 )
         mtrx[8] = px1
         mtrx[9] = px2
     rotarymod.setup_rotary_listener( 16 , 20, 21 , 23 , 24 , 25 , update_px )
