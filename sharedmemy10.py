@@ -57,9 +57,8 @@ def worker( evnt ):
         samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*freq/ sample_rate )).astype(np.float32)
         stream.write( samples.tobytes() )
         
-        if iters > 100:
-            print("Duration: ", dur)
-            print("Frequency: ", freq)
+        if iters > 10:
+            print("Duration: ", dur,"Frequency: ", freq)
             iters = 0 
         iters +=1
 
