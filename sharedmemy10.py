@@ -35,7 +35,7 @@ def matrix( evnt ):
     b[:] = a[:]                                            # Copy the original data into shared memory
     evnt.set()                                             # Signal that the shared memory object is ready
     while True:
-        print(' Matrix:  ', b )
+        print(' MTRX:  ', b )
         time.sleep(3)
 
 
@@ -92,18 +92,18 @@ def main():
     manager = Manager()
     evnt = manager.Event()
     m = multiprocessing.Process(target=matrix, args=( evnt, ))
-    w = multiprocessing.Process(target=worker, args=( evnt, ))
-    s = multiprocessing.Process(target=sensor, args=( evnt, ))
+    #w = multiprocessing.Process(target=worker, args=( evnt, ))
+    #s = multiprocessing.Process(target=sensor, args=( evnt, ))
     r = multiprocessing.Process(target=rotary, args=( evnt, ))
     procs.append(m)
-    procs.append(w)
-    procs.append(s)
+    #procs.append(w)
+    #procs.append(s)
     procs.append(r)
     m.start()
-    w.start()
-    s.start()
+    #w.start()
+    #s.start()
     r.start()        
-    set_realtime_priority( w.pid )
+    #set_realtime_priority( w.pid )
     for proc in procs:
         proc.join()
  
