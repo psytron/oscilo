@@ -50,14 +50,16 @@ def worker( evnt ):
     stream = pa.open(format=pyaudio.paFloat32,channels=1,rate=sample_rate,output=True)    
     dur = 0.001
     freq = 528
+    iters = 0
     while True:
         freq = 30+ ( mtrx[8] /10)
         dur = 0.5-(mtrx[9]/100)#+ ( mtrx[8] /10 )
         samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*freq/ sample_rate )).astype(np.float32)
         stream.write( samples.tobytes() )
-        if time.time() % 1 == 0:
+        if iters > 100:
             print("Duration: ", dur)
             print("Frequency: ", freq)
+            iters = 0 
 
 
 
