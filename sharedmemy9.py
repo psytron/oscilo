@@ -10,7 +10,7 @@ import os
 from ads1256 import harvest
 import numpy as np
 import pyaudio
-import rotaryencodery3
+import rotaryencodery5 as rotary
 import subprocess
 
 
@@ -77,7 +77,7 @@ def rotary( evnt ):
 
     def update_px( in_val ):
         mtrx[8] = in_val    
-    rotaryencodery3.setup_rotary_listener( update_px )
+    rotary.setup_rotary_listener( update_px )
 
     
 
