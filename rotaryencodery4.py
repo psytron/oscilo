@@ -17,7 +17,9 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , CLK2=23 , DT2=24 , SW2
 
     # Variables
     px = 0  # Initial value of px
+    px2 = 0
     last_CLK_state = False
+    last_CLK_state2 = False
 
 
     GPIO.setmode(GPIO.BCM)
@@ -45,14 +47,14 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , CLK2=23 , DT2=24 , SW2
 
 
     def handle_CLK_edge2(channel):
-        nonlocal last_CLK_state
-        nonlocal px
+        nonlocal last_CLK_state2
+        nonlocal px2
         current_CLK_state = GPIO.input(CLK)
         if current_CLK_state != last_CLK_state:
             if current_CLK_state and GPIO.input(DT) != current_CLK_state:
-                px += 1  # Increment px on clockwise rotation
+                px2 += 1  # Increment px on clockwise rotation
             elif current_CLK_state and GPIO.input(DT) == current_CLK_state:
-                px -= 1  # Decrement px on counterclockwise rotation
+                px2 -= 1  # Decrement px on counterclockwise rotation
         last_CLK_state = current_CLK_state
     def handle_SW_press2(channel):
         print("Switch pressed2!")        
@@ -69,9 +71,9 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , CLK2=23 , DT2=24 , SW2
 
 
     try:
-        #while True:
-        time.sleep(0.01) # CPU LIMIT
-        callback_in( px )
+        while True:
+            time.sleep(0.01) # CPU LIMIT
+            callback_in( px )
     except KeyboardInterrupt:
         GPIO.remove_event_detect(CLK)
         GPIO.remove_event_detect(DT)
