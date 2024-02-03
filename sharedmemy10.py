@@ -15,7 +15,7 @@ import subprocess
 
 
 
-def set_realtime_priority(pid, priority=90):
+def set_realtime_priority(pid, priority=99):
     try:
         subprocess.run(['sudo', 'chrt', '-f', '-p', str(priority), str(pid)], check=True)
     except subprocess.CalledProcessError as e:
