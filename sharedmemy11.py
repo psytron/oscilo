@@ -60,11 +60,11 @@ def waveform( evnt ):
         # float32: single-precision floating point precision audio process.
         samples = frame.astype(np.float32)
         
-        fade_start_val = samples[-6]
+        fade_start_val = samples[-9]
         # DSP  QuickFade
-        fade_out = np.linspace(fade_start_val, 0, 6)
+        fade_out = np.linspace(fade_start_val, 0, 9)
         # Apply the fade out effect to the last 5 samples by multiplying them with the reversed fade_out array
-        samples[-6:] = fade_out
+        samples[-9:] = fade_out
 
         stream.write( samples.tobytes() )
         
