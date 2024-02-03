@@ -10,7 +10,7 @@ import time
 
 
 
-def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , callback_in=print  ):
+def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , CLK2=23 , DT2=24 , SW2=25 , callback_in=print  ):
     #CLK = 16  # Clock pin
     #DT = 20  # Data pin
     #SW = 21  # Switch pin   
@@ -24,6 +24,10 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , callback_in=print  ):
     GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(DT, GPIO.IN)
     GPIO.setup(CLK, GPIO.IN)
+    GPIO.setup(SW2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(DT2, GPIO.IN)
+    GPIO.setup(CLK2, GPIO.IN)
+
 
     def handle_CLK_edge(channel):
         nonlocal last_CLK_state
@@ -35,15 +39,33 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , callback_in=print  ):
             elif current_CLK_state and GPIO.input(DT) == current_CLK_state:
                 px -= 1  # Decrement px on counterclockwise rotation
         last_CLK_state = current_CLK_state
-
-
     def handle_SW_press(channel):
         print("Switch pressed!")
+
+
+
+    def handle_CLK_edge2(channel):
+        nonlocal last_CLK_state
+        nonlocal px
+        current_CLK_state = GPIO.input(CLK)
+        if current_CLK_state != last_CLK_state:
+            if current_CLK_state and GPIO.input(DT) != current_CLK_state:
+                px += 1  # Increment px on clockwise rotation
+            elif current_CLK_state and GPIO.input(DT) == current_CLK_state:
+                px -= 1  # Decrement px on counterclockwise rotation
+        last_CLK_state = current_CLK_state
+    def handle_SW_press2(channel):
+        print("Switch pressed2!")        
+
+
+
 
 
     # Add event listener for CLK pin
     GPIO.add_event_detect(CLK, GPIO.BOTH, callback=handle_CLK_edge)    
     GPIO.add_event_detect(SW, GPIO.FALLING, callback=handle_SW_press)
+    GPIO.add_event_detect(CLK2, GPIO.BOTH, callback=handle_CLK_edge2)    
+    GPIO.add_event_detect(SW2, GPIO.FALLING, callback=handle_SW_press2)    
 
 
     try:
@@ -63,8 +85,6 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , callback_in=print  ):
 if __name__ == "__main__":
     def print_px_a(px):
         print("A px value: ", px)
-    setup_rotary_listener( 16,20,21,print_px_a)
+    setup_rotary_listener( 16,20,21,23,24,25,print_px_a)
 
-    def print_px_b(px):
-        print("B px value: ", px)
-    setup_rotary_listener( 23,24,25,print_px_b)    
+ 
