@@ -5,6 +5,8 @@ CLK = 16  # Clock pin
 DT = 20  # Data pin
 SW = 21  # Switch pin   
 
+#i3
+
 chip = gpiod.Chip('/dev/gpiochip4')
 
 # Request lines
