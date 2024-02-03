@@ -69,9 +69,10 @@ def waveform( evnt ):
         noiz = np.random.normal(0,2, len(samples))
 
         # YES  Normalize to [-1, 1] range # Apply mid-tread quantization , another knob 
-        n_samples = samples / np.max(np.abs(samples))
-        x_quantized = np.round(n_samples * mtrx[8] ) / mtrx[8] 
-        samples = x_quantized
+        # this works but needs bounds for mtrx[8] 
+        # n_samples = samples / np.max(np.abs(samples))
+        # x_quantized = np.round(n_samples * mtrx[8] ) / mtrx[8] 
+        # samples = x_quantized
 
         #samples = samples + ( noiz / mtrx[8] )
         stream.write( samples.tobytes() )
