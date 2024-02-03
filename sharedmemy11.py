@@ -52,7 +52,6 @@ def waveform( evnt ):
     while True:
         freq = 120+ ( mtrx[8] )
         dur = max(0.0001, 0.1 - (mtrx[9] / 1000))
-        
         # Generate a sinusoidal waveform with frequency 'freq' and duration 'dur'
         # The waveform is sampled at 'sample_rate' and the samples are converted to 32-bit floating point numbers
         frame = np.sin( 2*np.pi*np.arange(sample_rate * dur) * freq / sample_rate )
@@ -66,7 +65,9 @@ def waveform( evnt ):
         # Apply the fade out effect to the last 5 samples by multiplying them with the reversed fade_out array
         samples[-9:] = fade_out
 
-        noiz = np.random.normal(0,2, len(samples))
+        # NOIZ
+        # noiz = np.random.normal(0,2, len(samples))
+        #samples = samples + ( noiz / mtrx[8] )
 
         # YES  Normalize to [-1, 1] range # Apply mid-tread quantization , another knob 
         # this works but needs bounds for mtrx[8] 
@@ -74,7 +75,7 @@ def waveform( evnt ):
         # x_quantized = np.round(n_samples * mtrx[8] ) / mtrx[8] 
         # samples = x_quantized
 
-        #samples = samples + ( noiz / mtrx[8] )
+        
         stream.write( samples.tobytes() )
         
         if iters > 10:
