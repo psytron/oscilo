@@ -49,19 +49,15 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , CLK2=23 , DT2=24 , SW2
     def handle_CLK_edge2(channel):
         nonlocal last_CLK_state2
         nonlocal px2
-        current_CLK_state = GPIO.input(CLK)
+        current_CLK_state = GPIO.input(CLK2)
         if current_CLK_state != last_CLK_state:
-            if current_CLK_state and GPIO.input(DT) != current_CLK_state:
+            if current_CLK_state and GPIO.input(DT2) != current_CLK_state:
                 px2 += 1  # Increment px on clockwise rotation
-            elif current_CLK_state and GPIO.input(DT) == current_CLK_state:
+            elif current_CLK_state and GPIO.input(DT2) == current_CLK_state:
                 px2 -= 1  # Decrement px on counterclockwise rotation
         last_CLK_state = current_CLK_state
     def handle_SW_press2(channel):
         print("Switch pressed2!")        
-
-
-
-
 
     # Add event listener for CLK pin
     GPIO.add_event_detect(CLK, GPIO.BOTH, callback=handle_CLK_edge)    
