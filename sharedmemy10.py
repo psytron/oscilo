@@ -44,7 +44,7 @@ def matrix( evnt ):
 def worker( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
-    mtrx = np.ndarray((9,), dtype=np.float64, buffer=existing_shm.buf)
+    mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
     sample_rate = 44100
     pa = pyaudio.PyAudio()
     stream = pa.open(format=pyaudio.paFloat32,channels=1,rate=sample_rate,output=True)    
@@ -63,7 +63,7 @@ def worker( evnt ):
 def sensor( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
-    mtrx = np.ndarray((9,), dtype=np.float64, buffer=existing_shm.buf)
+    mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
     while True:
         r = harvest.yo()
         mtrx[:] = r[:]
@@ -73,10 +73,11 @@ def sensor( evnt ):
 def rotary( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
-    mtrx = np.ndarray((9,), dtype=np.float64, buffer=existing_shm.buf)
+    mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
 
-    def update_px( in_val ):
-        mtrx[8] = in_val    
+    def update_px( px1, px2 ):
+        mtrx[8] = px1
+        mtrx[9] = px2
     rotary.setup_rotary_listener( update_px )
 
     
