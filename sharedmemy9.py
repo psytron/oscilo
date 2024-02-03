@@ -7,7 +7,7 @@ import numpy as np
 import time
 import random
 import os 
-from ads1256 import harvest
+from ads import harvest
 import numpy as np
 import pyaudio
 import rotaryencodery5 as rotary
