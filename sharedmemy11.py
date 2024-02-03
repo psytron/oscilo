@@ -69,7 +69,7 @@ def waveform( evnt ):
         stream.write( samples.tobytes() )
         
         if iters > 10:
-            print( samples[:3] , "DUR: ",dur,"FRQ: ", freq ,' smps: ',samples[-3:] )
+            print( samples[:3] , " ]   DUR: ",dur,"FRQ: ", freq ,'  [',samples[-3:] )
             iters = 0 
         iters +=1
 
