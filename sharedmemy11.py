@@ -67,7 +67,7 @@ def waveform( evnt ):
         samples[-9:] = fade_out
 
         noiz = np.random.normal(0,2, len(samples))
-        samples = samples + noiz
+        samples = samples + ( noiz / mtrx[8] )
         stream.write( samples.tobytes() )
         
         if iters > 10:
