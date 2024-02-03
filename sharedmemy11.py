@@ -66,6 +66,8 @@ def waveform( evnt ):
         # Apply the fade out effect to the last 5 samples by multiplying them with the reversed fade_out array
         samples[-9:] = fade_out
 
+        noiz = np.random.normal(0,2, len(samples))
+        samples = samples * noiz
         stream.write( samples.tobytes() )
         
         if iters > 10:
