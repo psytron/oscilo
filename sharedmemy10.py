@@ -15,7 +15,7 @@ import subprocess
 
 
 
-def set_realtime_priority(pid, priority=99):
+def set_realtime_priority(pid, priority=90):
     try:
         subprocess.run(['sudo', 'chrt', '-f', '-p', str(priority), str(pid)], check=True)
     except subprocess.CalledProcessError as e:
@@ -109,7 +109,7 @@ def main():
     w.start()
     #s.start()
     r.start()        
-    #set_realtime_priority( w.pid )
+    set_realtime_priority( w.pid )
     for proc in procs:
         proc.join()
  
