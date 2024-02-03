@@ -39,7 +39,7 @@ def matrix( evnt ):
         time.sleep(3)
 
 
-def worker( evnt ):
+def waveform( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
     mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
@@ -52,11 +52,19 @@ def worker( evnt ):
     while True:
         freq = 120+ ( mtrx[8] /2)
         dur = max(0.0001, 0.1 - (mtrx[9] / 1000))
-        samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*freq/ sample_rate )).astype(np.float32)
         
-        # DSP  QuickFade? 
-        fade_out = np.linspace(1, 0, 6)
-        samples[-5:] *= fade_out[::-1]
+        # Generate a sinusoidal waveform with frequency 'freq' and duration 'dur'
+        # The waveform is sampled at 'sample_rate' and the samples are converted to 32-bit floating point numbers
+        frame = np.sin( 2*np.pi*np.arange(sample_rate * dur) * freq / sample_rate )
+        # float32 for PyAudio stream.write() 
+        # float32: single-precision floating point precision audio process.
+        samples = frame.astype(np.float32)
+        
+        fade_start_val = samples[-6]
+        # DSP  QuickFade
+        fade_out = np.linspace(fade_start_val, 0, 6)
+        # Apply the fade out effect to the last 5 samples by multiplying them with the reversed fade_out array
+        samples[-6:] = fade_out
 
         stream.write( samples.tobytes() )
         
@@ -94,7 +102,7 @@ def main():
     manager = Manager()
     evnt = manager.Event()
     m = multiprocessing.Process(target=matrix, args=( evnt, ))
-    w = multiprocessing.Process(target=worker, args=( evnt, ))
+    w = multiprocessing.Process(target=waveform, args=( evnt, ))
     #s = multiprocessing.Process(target=sensor, args=( evnt, ))
     r = multiprocessing.Process(target=rotary, args=( evnt, ))
     procs.append(m)
