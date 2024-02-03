@@ -69,7 +69,7 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , CLK2=23 , DT2=24 , SW2
     try:
         while True:
             time.sleep(0.01) # CPU LIMIT
-            callback_in( px )
+            print( px , px2 )
     except KeyboardInterrupt:
         GPIO.remove_event_detect(CLK)
         GPIO.remove_event_detect(DT)
