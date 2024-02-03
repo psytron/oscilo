@@ -55,6 +55,9 @@ def worker( evnt ):
         dur = 0.5-(mtrx[9]/100)#+ ( mtrx[8] /10 )
         samples = (np.sin(2*np.pi*np.arange( sample_rate *dur)*freq/ sample_rate )).astype(np.float32)
         stream.write( samples.tobytes() )
+        if time.time() % 1 == 0:
+            print("Duration: ", dur)
+            print("Frequency: ", freq)
 
 
 
