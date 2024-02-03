@@ -39,8 +39,6 @@ def matrix( evnt ):
         time.sleep(3)
 
 
- 
-
 def worker( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
@@ -67,8 +65,6 @@ def worker( evnt ):
             iters = 0 
         iters +=1
 
-
-
  
 
 def sensor( evnt ):
@@ -92,11 +88,6 @@ def rotary( evnt ):
     rotarymod.setup_rotary_listener( 16 , 20, 21 , 23 , 24 , 25 , update_px )
 
     
-
-
-
-
-
 
 def main():
     procs = []
