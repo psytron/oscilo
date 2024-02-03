@@ -58,3 +58,10 @@ def setup_rotary_listener( callback_in ):
         GPIO.remove_event_detect(DT)
         GPIO.remove_event_detect(SW)
         GPIO.cleanup()
+
+
+
+if __name__ == "__main__":
+    def print_px(px):
+        print("Current px value: ", px)
+    setup_rotary_listener(print_px)
