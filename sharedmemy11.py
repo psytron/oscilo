@@ -23,7 +23,7 @@ def set_realtime_priority(pid, priority=99):
 
 
 def matrix( evnt ):
-    a = np.array( [ 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 ] )      # Start with an existing NumPy array
+    a = np.array( [ 1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 1.0 ] )      # Start with an existing NumPy array
     
     # RAW ARRAY MONDAY 
     # Create a shared memory array using multiprocessing.RawArray
@@ -68,10 +68,8 @@ def waveform( evnt ):
 
         noiz = np.random.normal(0,2, len(samples))
 
-            # Normalize to [-1, 1] range
+        # YES  Normalize to [-1, 1] range # Apply mid-tread quantization , another knob 
         n_samples = samples / np.max(np.abs(samples))
-
-        # Apply mid-tread quantization
         x_quantized = np.round(n_samples * mtrx[8] ) / mtrx[8] 
         samples = x_quantized
 
