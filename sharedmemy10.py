@@ -76,9 +76,10 @@ def rotary( evnt ):
     mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
 
     def update_px( px1, px2 ):
+        print( 'px update ' , px1, px2 )
         mtrx[8] = px1
         mtrx[9] = px2
-    rotarymod.setup_rotary_listener( update_px )
+    rotarymod.setup_rotary_listener( 16 , 20, 21 , 23 , 24 , 25 , update_px )
 
     
 
