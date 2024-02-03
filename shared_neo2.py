@@ -83,11 +83,6 @@ def rotary( evnt ):
 
     
 
-
-
-
-
-
 def main():
     procs = []
     manager = Manager()
