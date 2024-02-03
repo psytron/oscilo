@@ -67,6 +67,14 @@ def waveform( evnt ):
         samples[-9:] = fade_out
 
         noiz = np.random.normal(0,2, len(samples))
+
+            # Normalize to [-1, 1] range
+        n_samples = samples / np.max(np.abs(samples))
+
+        # Apply mid-tread quantization
+        x_quantized = np.round(n_samples * mtrx[8] ) / mtrx[8] 
+        samples = x_quantized
+
         #samples = samples + ( noiz / mtrx[8] )
         stream.write( samples.tobytes() )
         

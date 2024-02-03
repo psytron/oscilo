@@ -11,6 +11,9 @@ def print_cpu_utilization():
     print('\n\n')
     for i, percentage in enumerate(cpu_percentages):
         print("Core: ",i,' ',percentage)
+        
+import os
+print(f"PID: {os.getpid()}")
 
 while True: 
     print_cpu_utilization()
