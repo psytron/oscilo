@@ -125,7 +125,7 @@ def main():
     w.start()
     #s.start()
     r.start()        
-    set_realtime_priority( w.pid )
+    #set_realtime_priority( w.pid )
     for proc in procs:
         proc.join()
  
