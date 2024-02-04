@@ -28,11 +28,20 @@ def matrix( evnt ):
     # RAW ARRAY MONDAY 
     # Create a shared memory array using multiprocessing.RawArray
     # 'd' specifies the typecode (double precision float), and 'a' is the existing numpy array
-    # shm2 = multiprocessing.RawArray('d', a)
-    
+
+
+    # PARAM CONTROLLER ARRAY
     shm = shared_memory.SharedMemory(create=True, size=a.nbytes  , name='xor')
     b = np.ndarray(a.shape, dtype=a.dtype, buffer=shm.buf) # Now create a NumPy array backed by shared memory
     b[:] = a[:]                                            # Copy the original data into shared memory
+
+    # SIGbARR
+    sample_rate = 44100
+    t = np.linspace(0, 1, sample_rate, False)  # 1 second duration
+    sine_wave = np.sin(188 * 2 * np.pi * t)  # 188 Hz sine wave
+    shm2 = shared_memory.SharedMemory(create=True, size=sine_wave.nbytes  , name='sig')
+    c = np.ndarray(sine_wave.shape, dtype=sine_wave.dtype, buffer=shm2.buf)     
+    
     evnt.set()                                             # Signal that the shared memory object is ready
     while True:
         print(' MTRX:  ', b )
@@ -43,6 +52,10 @@ def waveform( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
     mtrx = np.ndarray( (10,), dtype=np.float64, buffer=existing_shm.buf)
+
+    existing_shm2 = shared_memory.SharedMemory(name='sig')
+    sig = np.ndarray( (44100,), dtype=np.float64, buffer=existing_shm2.buf)
+    
     sample_rate = 44100
     pa = pyaudio.PyAudio()
     stream = pa.open(format=pyaudio.paFloat32,channels=1,rate=sample_rate,output=True)    
@@ -78,6 +91,8 @@ def waveform( evnt ):
 
     
         stream.write( samples.tobytes() )
+
+        stream.write( sig.tobytes() )
         
         
         if iters > 10:
