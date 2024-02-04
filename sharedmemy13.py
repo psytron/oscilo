@@ -153,7 +153,7 @@ def fx( evnt ):
         quant_amt = max(1, mtrx[0])
         sig_samples = sig / np.max(np.abs(sig))
         x_quantized = np.round(sig_samples * quant_amt ) / quant_amt
-        sig_samples = x_quantized
+        sig[:] = x_quantized[:]
 
 
 
