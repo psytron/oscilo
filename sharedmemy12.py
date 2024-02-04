@@ -92,7 +92,7 @@ def waveform( evnt ):
     
         stream.write( samples.tobytes() )
 
-        stream.write( sig.tobytes() )
+        stream.write(samples.tobytes() )
         
         
         if iters > 10:
