@@ -76,9 +76,9 @@ def waveform( evnt ):
         x_quantized = np.round(n_samples * quant_amt ) / quant_amt
         samples = x_quantized
 
-        print( 'before_write_stream ')
+ 
         stream.write( samples.tobytes() )
-        print( 'after_write_stream ')
+ 
         
         if iters > 10:
             print( samples[:4] , " ]   DUR: ",dur," LEN: ",len(samples)," FRQ: ", freq ,'  [',samples[-4:] )
