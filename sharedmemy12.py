@@ -101,7 +101,7 @@ def sensor( evnt ):
 def rotary( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
-    mtrx = np.ndarray( existing_shm.shape , dtype=np.float64, buffer=existing_shm.buf)
+    mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
 
     def update_px( px1, px2 ):
         mtrx[8] = px1
