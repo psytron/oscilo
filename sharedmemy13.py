@@ -151,6 +151,7 @@ def fx( evnt ):
     sig = np.ndarray( (44100,), dtype=np.float64, buffer=existing_shm2.buf)
     while True:
         quant_amt = max(1, mtrx[0])
+        print('fx',quant_amt)
         sig_samples = sig / np.max(np.abs(sig))
         x_quantized = np.round(sig_samples * quant_amt ) / quant_amt
         sig[:] = x_quantized[:]
