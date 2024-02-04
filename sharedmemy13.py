@@ -150,7 +150,7 @@ def fx( evnt ):
         print('fx',quant_amt)
         sig_samples = sig / np.max(np.abs(sig))
         x_quantized = np.round(sig_samples * quant_amt ) / quant_amt
-        sig[:] = x_quantized[:]
+        sig = x_quantized
 
 
 
