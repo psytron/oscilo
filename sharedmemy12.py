@@ -128,7 +128,7 @@ def main():
     procs.append(r)
     m.start()
     w.start()
-    #s.start()
+    s.start()
     r.start()        
     #set_realtime_priority( w.pid )
     for proc in procs:
