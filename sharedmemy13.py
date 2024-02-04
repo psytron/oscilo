@@ -101,12 +101,8 @@ def waveform( evnt ):
 
     
         stream.write( samples.tobytes() )
+        
         sig=sig.astype(np.float32)
-
-
-        n_sig = sig / np.max(np.abs(sig))
-        s_quantized = np.round(n_sig * quant_amt ) / quant_amt
-        sig = s_quantized
         stream.write( sig.tobytes() )
         
         
