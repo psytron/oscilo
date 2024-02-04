@@ -89,6 +89,7 @@ def waveform( evnt ):
  
 
 def sensor( evnt ):
+    print('sensor ')
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
     mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
