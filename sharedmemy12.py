@@ -71,7 +71,7 @@ def waveform( evnt ):
 
         # YES  Normalize to [-1, 1] range # Apply mid-tread quantization , another knob 
         # this works but needs bounds for mtrx[8] 
-        quant_amt = max(1, mtrx[0])
+        quant_amt = max(0.001, mtrx[0])
         n_samples = samples / np.max(np.abs(samples))
         x_quantized = np.round(n_samples * quant_amt ) / quant_amt
         samples = x_quantized
