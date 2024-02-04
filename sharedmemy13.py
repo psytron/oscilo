@@ -48,6 +48,13 @@ def matrix( evnt ):
         time.sleep(3)
 
 
+
+
+
+
+
+
+
 def waveform( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
@@ -105,7 +112,6 @@ def waveform( evnt ):
         
         if iters > 10:
             print( samples[:4] , " ]   DUR: ",dur," LEN: ",len(samples)," FRQ: ", freq ,'  [',samples[-4:] )
-
             iters = 0 
         iters +=1
 
@@ -134,7 +140,25 @@ def rotary( evnt ):
         mtrx[9] = px2
     rotarymod.setup_rotary_listener( 16 , 20, 21 , 23 , 24 , 25 , update_px )
 
-    
+
+
+def fx( evnt ):
+    evnt.wait()
+    existing_shm = shared_memory.SharedMemory(name='xor')
+    mtrx = np.ndarray( (10,), dtype=np.float64, buffer=existing_shm.buf)
+
+    existing_shm2 = shared_memory.SharedMemory(name='sig')
+    sig = np.ndarray( (44100,), dtype=np.float64, buffer=existing_shm2.buf)
+    while True:
+        quant_amt = max(1, mtrx[0])
+        sig_samples = sig / np.max(np.abs(sig))
+        x_quantized = np.round(sig_samples * quant_amt ) / quant_amt
+        samples = x_quantized
+
+
+
+
+
 
 def main():
     procs = []
