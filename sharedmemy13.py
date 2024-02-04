@@ -153,7 +153,7 @@ def fx( evnt ):
         quant_amt = max(1, mtrx[0])
         sig_samples = sig / np.max(np.abs(sig))
         x_quantized = np.round(sig_samples * quant_amt ) / quant_amt
-        samples = x_quantized
+        sig_samples = x_quantized
 
 
 
@@ -168,14 +168,13 @@ def main():
     w = multiprocessing.Process(target=waveform, args=( evnt, ))
     s = multiprocessing.Process(target=sensor, args=( evnt, ))
     r = multiprocessing.Process(target=rotary, args=( evnt, ))
-    procs.append(m)
-    procs.append(w)
-    procs.append(s)
-    procs.append(r)
+    f = multiprocessing.Process(target=fx, args=( evnt, ))
+    procs.extend([m, w, s, r, f])
     m.start()
     w.start()
     s.start()
-    r.start()        
+    r.start()
+    f.start()        
     #set_realtime_priority( w.pid )
     for proc in procs:
         proc.join()
