@@ -94,7 +94,10 @@ def sensor( evnt ):
     mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
     while True:
         r = harvest.yo()
-        mtrx[:] = r[:]
+        print( 'harvested r: ', r)
+        #mtrx[:] = r[:]
+        mtrx[0] = r[0]
+        mtrx[1] = r[1]
     
 
 
