@@ -42,7 +42,7 @@ def matrix( evnt ):
 def waveform( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
-    mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
+    mtrx = np.ndarray(existing_shm.shape, dtype=existing_shm.dtype, buffer=existing_shm.buf)
     sample_rate = 44100
     pa = pyaudio.PyAudio()
     stream = pa.open(format=pyaudio.paFloat32,channels=1,rate=sample_rate,output=True)    
@@ -71,14 +71,14 @@ def waveform( evnt ):
 
         # YES  Normalize to [-1, 1] range # Apply mid-tread quantization , another knob 
         # this works but needs bounds for mtrx[8] 
-        quant_amt = max(0.001, mtrx[0])
+        quant_amt = max(1, mtrx[0])
         n_samples = samples / np.max(np.abs(samples))
         x_quantized = np.round(n_samples * quant_amt ) / quant_amt
         samples = x_quantized
 
- 
+        
         stream.write( samples.tobytes() )
- 
+        
         
         if iters > 10:
             print( samples[:4] , " ]   DUR: ",dur," LEN: ",len(samples)," FRQ: ", freq ,'  [',samples[-4:] )
@@ -94,7 +94,6 @@ def sensor( evnt ):
     mtrx = np.ndarray(existing_shm.shape, dtype=existing_shm.dtype, buffer=existing_shm.buf)
     while True:
         r = harvest.yo()
-        
         mtrx[:] = r[:]
     
 
@@ -103,7 +102,7 @@ def rotary( evnt ):
     evnt.wait()
     existing_shm = shared_memory.SharedMemory(name='xor')
     mtrx = np.ndarray(existing_shm.shape, dtype=existing_shm.dtype, buffer=existing_shm.buf)
-    print('rotary on')
+
     def update_px( px1, px2 ):
         mtrx[8] = px1
         mtrx[9] = px2
