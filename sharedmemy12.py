@@ -94,7 +94,7 @@ def sensor( evnt ):
     existing_shm = shared_memory.SharedMemory(name='xor')
     mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
     while True:
-        print( 'harvested r1: ', r)
+        print( 'harvested r1: ')
         r = harvest.yo()
         print( 'harvested r2: ', r)
         #mtrx[:] = r[:]
