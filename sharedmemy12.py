@@ -41,7 +41,7 @@ def matrix( evnt ):
     sine_wave = np.sin(188 * 2 * np.pi * t)  # 188 Hz sine wave
     shm2 = shared_memory.SharedMemory(create=True, size=sine_wave.nbytes  , name='sig')
     c = np.ndarray(sine_wave.shape, dtype=sine_wave.dtype, buffer=shm2.buf)     
-    
+    c[:]=sine_wave
     evnt.set()                                             # Signal that the shared memory object is ready
     while True:
         print(' MTRX:  ', b )
