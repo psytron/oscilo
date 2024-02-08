@@ -1,6 +1,4 @@
 
-
-
 #include <iostream>
 #include <chrono>
 #include <vector>
@@ -8,7 +6,6 @@
 std::vector<std::vector<int>> matrixMultiplication(std::vector<std::vector<int>>& a, std::vector<std::vector<int>>& b) {
     int n = a.size();
     std::vector<std::vector<int>> result(n, std::vector<int>(n));
-
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             result[i][j] = 0;
@@ -20,7 +17,6 @@ std::vector<std::vector<int>> matrixMultiplication(std::vector<std::vector<int>>
     return result;
 }
 
-
 int main() {
     using namespace std::chrono;
     auto start_time = high_resolution_clock::now();
@@ -28,8 +24,7 @@ int main() {
 
     while (true) {
         iterations++;
-
-       // Create two 2x2 matrices
+       // Create 2 2X2 matrices
         std::vector<std::vector<int>> a = {{rand() % 100, rand() % 100}, {rand() % 100, rand() % 100}};
         std::vector<std::vector<int>> b = {{rand() % 100, rand() % 100}, {rand() % 100, rand() % 100}};
         std::vector<std::vector<int>> res = matrixMultiplication(a, b);
@@ -51,10 +46,10 @@ int main() {
                 }
                 std::cout << " ";
             }
+            std::cout.flush();  // Flush the output buffer
             iterations = 0;
             start_time = high_resolution_clock::now();
         }
     }
-
     return 0;
 }
