@@ -95,10 +95,6 @@ def waveform( evnt ):
         n_samples = samples / np.max(np.abs(samples))
         x_quantized = np.round(n_samples * quant_amt ) / quant_amt
         samples = x_quantized
-
-
-
-
     
         stream.write( samples.tobytes() )
         
