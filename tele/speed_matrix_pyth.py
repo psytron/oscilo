@@ -1,8 +1,6 @@
 
 
 
-
-
 import random
 import time
 
@@ -21,7 +19,6 @@ def measure_ghz():
     start_time = time.time()
     iterations = 0
     while True:
-
         iterations += 1
        # Create two 2x2 matrices
         a = [[random.randint(0, 99) for _ in range(2)] for _ in range(2)]
@@ -40,6 +37,6 @@ def measure_ghz():
             print(f"   Result: ", res[0][0],res[0][1],res[1][0],res[1][1])                                          
             iterations = 0
             start_time = time.time()
-
+            
 if __name__ == "__main__":
     measure_ghz()
