@@ -1,0 +1,26 @@
+
+
+
+# - LAN8720 module 3.3V to ESP32 3.3V
+# - LAN8720 module GND to ESP32 GND
+# - LAN8720 module TX1 to ESP32 GPIO 19
+# - LAN8720 module TX_EN to ESP32 GPIO 22
+# - LAN8720 module RX1 to ESP32 GPIO 21
+# - LAN8720 module nRST (Reset) to ESP32 EN
+
+from machine import Pin, SPI
+import network
+import time
+
+def trigger_relay(pin_number):
+    relay = Pin(pin_number, Pin.OUT)
+    relay.value(1)  # Trigger the relay ON
+    time.sleep(20)  # Wait for 20 seconds restart
+    relay.value(0)  # Trigger the relay OFF
+# Initialize SPI
+spi = SPI(1)
+spi.init(baudrate=10000000, polarity=0, phase=0)
+
+# Initialize Ethernet
+eth = network.LAN(spi, mdc=Pin(23), mdio=Pin(18), power=Pin(17))
+eth.active( True )
