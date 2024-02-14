@@ -8,7 +8,7 @@ from gpiozero import RotaryEncoder, RGBLED, Button
 # The 'wrap' parameter set to True allows the rotary encoder to loop from its maximum value back to its minimum value and vice versa
 # The 'max_steps' parameter (180) sets the maximum number of steps the rotary encoder can take in one direction
 rotor = RotaryEncoder(16, 20, wrap=False, max_steps=1800)
-rotor.steps = -180
+rotor.steps = 0
 # Create an RGBLED object with the given pin numbers. The 'active_high' parameter set to False means the LED is active when the GPIO pin is low (0V)
 led = RGBLED(22, 23, 24, active_high=False)
 btn = Button(21, pull_up=False)
