@@ -1,4 +1,3 @@
-
 from threading import Event
 from colorzero import Color
 from gpiozero import RotaryEncoder, RGBLED, Button
