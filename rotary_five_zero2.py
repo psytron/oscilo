@@ -9,7 +9,6 @@ from gpiozero import RotaryEncoder, RGBLED, Button
 # The 'max_steps' parameter (180) sets the maximum number of steps the rotary encoder can take in one direction
 rotor = RotaryEncoder(16, 20, wrap=False, max_steps=1800)
 rotor.steps = 0
-# Create an RGBLED object with the given pin numbers. The 'active_high' parameter set to False means the LED is active when the GPIO pin is low (0V)
 led = RGBLED(22, 23, 24, active_high=False)
 btn = Button(21, pull_up=False)
 led.color = Color('#f00')
@@ -28,10 +27,8 @@ def stop_script():
     print('Exiting')
     done.set()
 
-print('Select a color by turning the knob')
+
 rotor.when_rotated = change_hue
-print('Push the button to see the HTML code for the color')
-btn.when_released = show_color
-print('Hold the button to exit')
-btn.when_held = stop_script
+btn.when_released = show_color  # Push the button to see the HTML code for the color
+btn.when_held = stop_script     # Hold the button to exit
 done.wait()
