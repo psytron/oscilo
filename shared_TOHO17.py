@@ -62,7 +62,12 @@ def waveform( evnt ):
     stream = pa.open(format=pyaudio.paFloat32,channels=1,rate=sample_rate,output=True)    
  
     iters = 0
+    lf = 0 
     while True:
+        lf = 1000 * np.sin(2 * np.pi * iters / 1000)
+        iters += 1
+        if iters >= 1000:
+            iters = 0
         # freq = 120
         # dur = 1
         # frame = np.sin( 2*np.pi*np.arange(sample_rate * dur) * freq / sample_rate )
@@ -101,7 +106,7 @@ def fx( evnt ):
         # existing_shm2.buf[:sig.nbytes] = sig.tobytes()
 
         print('fx: ',quant_amt, '  ',i)
-        if( i > 100 ):
+        if( i > 1000 ):
             ctl[0] = np.random.randint(1, 20)
             ctl[1] = np.random.randint(1, 20)
             ctl[2] = np.random.randint(1, 20)
