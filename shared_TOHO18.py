@@ -9,7 +9,7 @@ from multiprocessing import shared_memory, Event, Manager
 import multiprocessing
 import numpy as np
 import pyaudio
-
+import rotaryencodery6 as rotarymod
 
 
 
