@@ -78,7 +78,7 @@ def waveform( evnt ):
         sig=sig.astype(np.float32)
         #stream.write( sig.tobytes() )
         
-        print(' buffer:: ',iters % 2)
+        print('Buffer:: ',iters % 2)
 
 
 
