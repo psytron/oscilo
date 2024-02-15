@@ -1,11 +1,9 @@
 
-
-
 import smbus2 as smbus
 import time
 
 bus = smbus.SMBus(1)  # 1 indicates /dev/i2c-1
-address = 0x20  # replace with your MCP23017 device address
+address = 0x27  # replace with your MCP23017 device address
 
 # MCP23017 Register addresses
 IODIRA_REGISTER = 0x00  # IODIRA register (inputs/outputs)
