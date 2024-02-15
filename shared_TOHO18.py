@@ -73,7 +73,7 @@ def waveform( evnt ):
         # frame = np.sin( 2*np.pi*np.arange(sample_rate * dur) * freq / sample_rate )
         # Create a new ndarray that views the first 22050 elements of sig
         
-        k = max(0.00001, ctl[9])
+        k = max(0.0001, ctl[9])
         seg_size = int( k )
         sig_trunc = np.ndarray( (seg_size,), dtype=np.float64, buffer=shm_s.buf)
         samples = sig_trunc.astype(np.float32)
@@ -81,7 +81,7 @@ def waveform( evnt ):
         sig=sig.astype(np.float32)
         #stream.write( sig.tobytes() )
         
-        print('Buffer:: ',iters % 2)
+        print('Buffer:: ',sig_trunc.shape, '  iter: ', iters, ' iter% ', iters % 2)
 
 
 
