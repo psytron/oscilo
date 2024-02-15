@@ -105,12 +105,13 @@ def fx( evnt ):
         # Write the updated 'sig' array back to the shared memory
         # existing_shm2.buf[:sig.nbytes] = sig.tobytes()
 
-        print('fx: ',quant_amt, '  ',i)
+        
         if( i > 10000 ):
             ctl[0] = np.random.randint(1, 20)
             ctl[1] = np.random.randint(1, 20)
             ctl[2] = np.random.randint(1, 20)
             i = 0
+            print(' FX   fx: ',quant_amt, '  ',i)
         i = i +1 
     
 
