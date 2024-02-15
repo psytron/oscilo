@@ -1,4 +1,7 @@
-import smbus
+
+
+
+import smbus2 as smbus
 import time
 
 # Create an SMBus instance
