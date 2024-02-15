@@ -14,7 +14,7 @@ bus.write_byte_data(address, IODIRA_REGISTER, 0xFF)
 
 while True:
     # Read all 8 inputs from GPIOA
-    inputs = bus.read_byte_data(address, GPIOA_REGISTER)
-    print("Inputs: ", bin(inputs))
-
+    for pin in range(8):
+        inputs = bus.read_byte_data(address, GPIOA_REGISTER + pin)
+        print(f"Input from pin {pin}: ", bin(inputs))
     time.sleep(1)  # delay between readings
