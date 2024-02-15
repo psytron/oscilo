@@ -96,7 +96,7 @@ def fx( evnt ):
     while True:
         wav = sig
         quant_amt = ctl[9] #quant_amt = max(1, mtrx[0]) 
-        freq = ctl[8]*2
+        freq = ctl[8]
         dur = 1
         frame = np.sin( 2*np.pi*np.arange(44100 * dur) * freq / 44100 )
         sig_samples = frame / np.max(np.abs(frame))

@@ -53,7 +53,7 @@ def matrix( evnt ):
 
 def rotary( evnt ):
     evnt.wait()
-    existing_shm = shared_memory.SharedMemory(name='xor')
+    existing_shm = shared_memory.SharedMemory(name='ctl')
     mtrx = np.ndarray((10,), dtype=np.float64, buffer=existing_shm.buf)
 
     def update_px( px1, px2 ):
