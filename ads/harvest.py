@@ -19,6 +19,7 @@ print( 'about to import ADS1256mod')
 
 import RPi.GPIO as GPIO
 import random
+import json
 from . import ADS1256mod
 
 import socket
@@ -81,7 +82,7 @@ def stream_to_address_on_port( address_in , port_in ):
             # override to send timestamp 
             # message = str(datetime.datetime.now())
             
-            s.sendall(message.encode())
+            s.sendall( json.dumps( message ).encode() )
             
             data = s.recv(1024)
             print(f'Received: {data.decode()}')
