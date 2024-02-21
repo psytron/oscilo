@@ -1,62 +1,53 @@
-
-
-
-
-
 import polars as pl
-import plotly.graph_objects as go
 import numpy as np
-import time
+from datetime import datetime, timedelta
+ 
+NUM_SAMPLES =  3
+ 
+days = [ datetime.now() + timedelta(seconds=x) for x in range( NUM_SAMPLES )]
 
-# Define the sampling rate and the duration of the signal
-sampling_rate = 44100  # Hz
-duration = 1.0  # In seconds
+# Generate random data for close, bid, ask, vol columns
+np.random.seed(0)
+data = np.random.rand( NUM_SAMPLES , 4)
 
-# Generate the time axis for the signal
-t = np.linspace(0, duration, int(sampling_rate * duration), False)
-
-# Generate a sine wave
-f = 440  # Frequency of the sine wave in Hz
-signal = np.sin(f * 2 * np.pi * t)
-
-# Create a Polars DataFrame to hold the data
+# Create a new polars dataframe
 df = pl.DataFrame({
-    'Time': t,
-    'Signal': signal
+    'date': days,
+    'symbol': np.random.choice( ['ETH/BTC', 'BTC/USD'] ),
+    'close': data[:, 0],
+    'bid': data[:, 1],
+    'ask': data[:, 2],
+    'vol': data[:, 3]
 })
 
-# Create a Plotly figure
-fig = go.Figure()
+print( df )
+print(  df['date'][-1:] )
+print(df.tail(1))
 
-# Add a scatter trace for the signal
-fig.add_trace(go.Scatter(x=df['Time'], y=df['Signal'], mode='lines'))
 
-# Set the title and labels
-fig.update_layout(
-    title='Real-time Sine Wave',
-    xaxis_title='Time (seconds)',
-    yaxis_title='Amplitude'
-)
+from joblib import Parallel, delayed
+import time
+import os
 
-# Function to update the figure with new data
-def update_figure(fig, df):
-    fig.data[0].x = df['Time']
-    fig.data[0].y = df['Signal']
-    fig.update_layout()
+# Function to check the last value of the dataframe
+def check_last_value(df):
+    while True:
+        print(f'Process ID: {os.getpid()}, Last Value: {df.tail(1)}')
+        time.sleep(1)
 
-while True:
-    # Shift the time axis by the duration
-    df = df.with_column(pl.col('Time') + duration).rename('Time')
+def check_first_value( df ):
+    while True:
+        print(f'Process ID: {os.getpid()}, First Value: {df.head(1)}')
+        
+        time.sleep(1)    
 
-    # Generate a new sine wave
-    signal = np.sin(f * 2 * np.pi * (df['Time'] % (1 / f)))
+# Start two separate long running processes
+# The following code is using the joblib library to run multiple instances of the function 'check_last_value' in parallel.
+# 'Parallel' is a utility function that allows easy parallelization of simple for-loops.
+# 'n_jobs' parameter specifies the maximum number of concurrently running jobs. Here, it is set to 2, meaning two processes will run concurrently.
+# 'delayed' is a simple trick to specify a function to be called and arguments to be used, without calling the function. It is used here to delay the execution of 'check_last_value' function.
+# 'delayed' is a function provided by the joblib library. It is a simple and clever way to specify a function to be called and arguments to be used, without actually calling the function immediately. This is particularly useful when we want to parallelize the execution of a function across multiple cores or processors. By using 'delayed', we can specify all the function calls we want to make in advance, and then let joblib handle the parallelization for us. This can lead to significant performance improvements, especially for computationally intensive tasks.
 
-    # Update the signal in the DataFrame
-    df = df.with_column(pl.col('Signal').set(signal)).rename('Signal')
-
-    # Update the figure
-    update_figure(fig, df)
-
-    # Pause for a while
-    time.sleep(0.1)
-fig.show()
+# The 'check_last_value' function is called with the argument 'df' (our dataframe).
+# The for loop '_ in range(2)' is used to specify the number of times the function should be called, in this case, twice.
+Parallel(n_jobs=2)( delayed(func)(df) for func in [check_first_value, check_last_value] )

@@ -35,7 +35,6 @@ pwm = GPIO.PWM(buzzerPin, 1)
 
 try:
     pwm.start(40)
-    
     time.sleep(1)
     pwm.ChangeFrequency(240) 
     time.sleep(1)
