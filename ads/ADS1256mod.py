@@ -1,4 +1,6 @@
-import config
+
+
+from . import config
 import RPi.GPIO as GPIO
 
 
