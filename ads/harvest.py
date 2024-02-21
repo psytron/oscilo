@@ -16,14 +16,13 @@ import sys
 print("Current file path for module search: ", sys.path)
 
 print( 'about to import ADS1256mod')
-from . import ADS1256mod
+
 import RPi.GPIO as GPIO
 import random
-
+from . import ADS1256mod
 
 ADC = ADS1256mod.ADS1256()
 ADC.ADS1256_init()
-time.sleep(2)
 
         
  
