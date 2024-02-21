@@ -50,7 +50,7 @@ def yo():
 
 
 def read():
-    ADC_Value = ADC.ADS1256_GetAll()
+    valz = ADC.ADS1256_GetAll()
     out_arr = [ valz[0]*5.0/0x7fffff ,
                 valz[1]*5.0/0x7fffff ,
                 valz[2]*5.0/0x7fffff ,
