@@ -2,6 +2,8 @@
 
 
 import socket
+from datetime import datetime
+            
 
 HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
@@ -23,8 +25,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             conn.sendall(data)  # Echo back the message
 
 
-            from datetime import datetime
-            
+
 
 
 
