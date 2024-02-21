@@ -7,6 +7,7 @@ HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind((HOST, PORT))
     s.listen()
     conn, addr = s.accept()
@@ -18,11 +19,12 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             if not data:
                 break
             print(f'Received: {data.decode()}')
+            print( 'MACHINE : ',datetime.now())
             conn.sendall(data)  # Echo back the message
 
 
             from datetime import datetime
-            print(datetime.now())
+            
 
 
 
