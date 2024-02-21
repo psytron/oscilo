@@ -17,6 +17,16 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         print(f'Connected by {addr}')
         while True:
             # 1024 for conn.recv max data one time 
+            # The recv() method in socket programming is used to receive data from the socket. 
+            # The method takes one argument, the maximum amount of data to be received at once. 
+            # This is necessary because the incoming data could be of arbitrary length, and we do not want to overflow the receiving buffer.
+            # Here, we are receiving data up to 1024 bytes. If the incoming data is more than 1024 bytes, 
+            # the recv() method will receive the first 1024 bytes and the rest of the data will be received in the next call to recv().
+            # Yes, the recv() method is a blocking method by default. 
+            # This means that if no data is available to be received, the method will wait until there is data.
+            # If you want to make it non-blocking, you can set the socket to non-blocking mode with setblocking(0) 
+            # or use the settimeout() method to set a timeout.
+            # data = conn.recv(1024, socket.MSG_DONTWAIT)
             data = conn.recv(1024)
             if not data:
                 break

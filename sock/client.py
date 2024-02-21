@@ -1,6 +1,7 @@
 
 
 import socket
+import datetime
 
 HOST = 'Alophants-Air.lan'  # The server's hostname or IP address
 PORT = 65432        # The port used by the server
@@ -12,8 +13,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
     while True:
         message = input("Enter message: ")
-        import datetime
-        message = str(datetime.datetime.now())
+        
+        # override to send timestamp 
+        # message = str(datetime.datetime.now())
+        
         s.sendall(message.encode())
         
         data = s.recv(1024)
