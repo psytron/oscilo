@@ -2,7 +2,7 @@
 
 import socket
 
-HOST = 'localhost'  # The server's hostname or IP address
+HOST = 'Alophants-Air.lan'  # The server's hostname or IP address
 PORT = 65432        # The port used by the server
 
 # Create a socket object using socket.socket() method

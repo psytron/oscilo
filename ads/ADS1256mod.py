@@ -202,6 +202,11 @@ class ADS1256:
         
     def ADS1256_GetAll(self):
         ADC_Value = [0,0,0,0,0,0,0,0]
+        # The range function parameters are (start, stop, step)
+        # start: 0 - the sequence starts at 0
+        # stop: 8 - the sequence stops before 8
+        # step: 1 - the sequence increments by 1 each time
+        # So, in each iteration, 'i' will take on the values 0, 1, 2, 3, 4, 5, 6, 7 in that order
         for i in range(0,8,1):
             ADC_Value[i] = self.ADS1256_GetChannalValue(i)
         return ADC_Value
