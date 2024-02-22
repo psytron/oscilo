@@ -3,6 +3,7 @@
 
 import socket
 from datetime import datetime
+import json
             
 
 HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
@@ -30,8 +31,19 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             data = conn.recv(1024)
             if not data:
                 break
-            print(f'Received: {data.decode()}')
-            print( 'MACHINE : ',datetime.now())
+            dat = data.decode()
+            datl = json.loads( dat )
+            print(f'Received: { datl["message"] }')
+            
+            sent_time = datetime.strptime(datl["sent_time"], '%Y-%m-%d %H:%M:%S.%f')
+            print( 'SENT TIME: ', sent_time)
+            print( 'RECV TIME: ',datetime.now())
+            tt =         datetime.now()-sent_time
+            tt_seconds = tt.total_seconds()
+            print( 'TRABSIT T: ',tt_seconds )
+            
+            print(  )
+            print( ' ')
             conn.sendall(data)  # Echo back the message
 
 
