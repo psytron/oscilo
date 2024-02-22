@@ -67,6 +67,11 @@ def read():
     return out_arr 
 
 
+def readzero():
+    valz = ADC.ADS1256_Read_ADC_Data()
+    return valz
+
+
 
 def stream_to_address_on_port( address_in , port_in ):
     HOST = address_in
