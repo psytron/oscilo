@@ -2,11 +2,32 @@
 
 
 
-import RPi.GPIO as GPIO
+
 import time
+import socket
+import datetime
+import random
+import platform
 
 # Pin configuration
 # DEFAULT: 
+
+px = 0  # Initial value of px
+px2 = 0
+
+
+def setup_random_emitter( callback_in=print  ):
+    global px    
+    global px2
+    import math
+    iteration =0
+    while True:
+        time.sleep( 0.01 )
+
+        px = 50 * (1 + math.sin(2 * math.pi * iteration / 120))
+        px2 = 50 * (1 + math.sin(2 * math.pi * iteration / 300))
+        iteration = (iteration + 1) % 120
+        callback_in( px , px2 )
 
 
 
@@ -14,15 +35,12 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , CLK2=23 , DT2=24 , SW2
     #CLK = 16  # Clock pin
     #DT = 20  # Data pin
     #SW = 21  # Switch pin   
-
     # Variables
-    px = 0  # Initial value of px
-    px2 = 0
+    import RPi.GPIO as GPIO
     last_CLK_state = False
     last_CLK_state2 = False
 
-
-    GPIO.setmode(GPIO.BCM)
+    GPIO.setmode( GPIO.BCM )
     GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(DT, GPIO.IN)
     GPIO.setup(CLK, GPIO.IN)
@@ -38,7 +56,7 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , CLK2=23 , DT2=24 , SW2
 
     def handle_CLK_edge(channel):
         nonlocal last_CLK_state
-        nonlocal px
+        global px
         current_CLK_state = GPIO.input(CLK)
         if current_CLK_state != last_CLK_state:
             if current_CLK_state and GPIO.input(DT) != current_CLK_state:
@@ -51,7 +69,7 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , CLK2=23 , DT2=24 , SW2
 
     def handle_CLK_edge2(channel):
         nonlocal last_CLK_state2
-        nonlocal px2
+        global px2
         current_CLK_state2 = GPIO.input(CLK2)
         if current_CLK_state2 != last_CLK_state2:
             if current_CLK_state2 and GPIO.input(DT2) != current_CLK_state2:
@@ -92,6 +110,41 @@ def setup_rotary_listener( CLK = 16  , DT = 20, SW = 21 , CLK2=23 , DT2=24 , SW2
         GPIO.remove_event_detect(SW)
         GPIO.cleanup()
 
+
+
+def stream_to_address_on_port( address_in , port_in ):
+    HOST = address_in
+    PORT = port_in
+    global px
+    global px2
+
+
+
+    # Create a socket object using socket.socket() method
+    # AF_INET is the address family of the socket. This is the Internet address family for IPv4.
+    # SOCK_STREAM is the socket type for TCP, the protocol that will be used to transport our messages in the network.
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((HOST, PORT))
+
+        def callback_fun( pars ):
+            print( 'pars' )
+            print( pars )
+
+        if platform.system() == 'Darwin':  # Darwin indicates MacOS
+            setup_random_emitter( callback_fun )
+        elif platform.system() == 'Linux':  # Raspberry Pi runs on a Linux OS
+            setup_rotary_listener( 16, 20, 21, 23, 24, 25, callback_fun )        
+        
+        while True:
+            message = ( {'x':px , 'y':px2 } )
+            print(' is this streaming ? ')
+            # override to send timestamp 
+            # message = str(datetime.datetime.now())
+            
+            s.sendall( json.dumps( message ).encode() )
+            
+            data = s.recv(1024)
+            print(f'Received: {data.decode()}')
 
 
 

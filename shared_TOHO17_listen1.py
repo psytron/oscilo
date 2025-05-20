@@ -165,8 +165,8 @@ def socketlisten( evnt ):
                 tt_seconds = tt.total_seconds()
                 print( 'TRABSIT T: ',tt_seconds )
                 
-                print(  )
-                print( ' ')
+                print( )
+                print(' ')
                 conn.sendall(data)  # Echo back the message
 
 
@@ -185,13 +185,13 @@ def main():
     w = multiprocessing.Process(target=waveform, args=( evnt, ))
     f = multiprocessing.Process(target=fx, args=( evnt, ))    
     s = multiprocessing.Process(target=socketlisten, args=( evnt, ))        
-    procs.append(m)
-    procs.append(w)
-    procs.append(f)
+    # procs.append(m)
+    # procs.append(w)
+    # procs.append(f)
     procs.append(s)    
-    m.start()
-    w.start()
-    f.start()
+    #m.start()
+    #w.start()
+    #f.start()
     s.start()    
       
     #set_realtime_priority( w.pid )
