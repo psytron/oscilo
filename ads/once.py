@@ -27,8 +27,7 @@ try:
     print("RND    = %d" % random.randint(0, 100))
     # This line moves the cursor up 9 lines in the console
     print ('\n')
-    print ( ADC_Value[0] )
-    print ("\33[9A")
+    print ( (ADC_Value[0]*5.0/0x7fffff) )
 
 
         
